@@ -29,4 +29,17 @@ module SessionsHelper
   def require_logged_out
     redirect_to root_url if logged_in?
   end
+
+  def require_authorization
+    owner = User.find(params[:id])
+
+    unless current_user == owner
+      flash[:errors] = "You are not authorized to view this page"
+      if logged_in?
+        redirect_to user_url(current_user) 
+      else
+        redirect_to new_session_url
+      end
+    end 
+  end
 end

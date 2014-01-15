@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :require_logged_out, :only => [:new, :create]
+  before_filter :require_authorization, :except => [:new, :create]
+
   def new
     @user = User.new
   end
@@ -13,6 +16,9 @@ class UsersController < ApplicationController
     else
       flash.now[:errors] = @user.errors.full_messages
     end
+  end
+
+  def show
   end
 
   def update
