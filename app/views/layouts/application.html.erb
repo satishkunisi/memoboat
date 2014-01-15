@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memoboat</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+   
+
+  <nav class="navbar navbar-default" role="navigation">
+    <ul class="nav navbar-nav">
+      <li>
+        <%= link_to("Home", "#") %>
+      </li>
+      <li>
+      <% if logged_in? %>
+        <%= link_to("Sign Out", session_url, :method => :delete) %>
+      <% else %>
+        <%= link_to("Sign In", new_session_url) %>
+      <% end %> 
+      </li>
+    </ul>
+  </nav>
+
+   <% if flash[:errors] %>
+    
+    <div class="row">
+      <div class="col-xs-6">
+        <% flash[:errors].each do |error| %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+
+  
+
+<%= yield %>
+
+</body>
+</html>

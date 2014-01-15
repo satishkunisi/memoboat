@@ -1,0 +1,33 @@
+<% action = (@user.persisted?) ? user_url(@user) : users_url %>
+<% button = (@user.persisted?) ? "Update Profile" :  "Sign Up" %>
+
+
+<form action="<%= action %>" method="POST">
+
+  <% if @user.persisted? %>
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <label for="user_email">Email Address</label>
+  <input type="email" 
+         name="user[email]" 
+         id="user_email" 
+         value="<%= @user.email %>">
+
+  <label for="user_password">Password</label>
+  <input type="password"
+         name="user[password]"
+         id="user_password">
+
+  <input type="submit"
+         value="<%= button %>">
+
+</form>
+
+
+
+
