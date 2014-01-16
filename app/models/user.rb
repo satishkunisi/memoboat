@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :password, :length => {:minimum => 6, :allow_nil => true}
 
   before_validation :ensure_session_token
+  after_save :create_default_notebook
 
   has_many :notebooks,
            :class_name => "Notebook",
@@ -47,6 +48,10 @@ class User < ActiveRecord::Base
   private
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
+  end
+
+  def create_default_notebook
+    self.notebooks.create!(:title => "Default Notebook")
   end
 
 end

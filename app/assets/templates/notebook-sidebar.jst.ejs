@@ -1,0 +1,7 @@
+<% notebooks.forEach(function (notebook) { %>
+  <a href="#" class="list-group-item" data-id="<%= notebook.id %>">
+    <span class="listgroup-item-heading">
+      <%= notebook.get('title') %>
+    </h4>
+  </a>
+<% }) %>

@@ -1,5 +1,21 @@
+<script type="text/json" id="bootstrapped-data">
+  { "userId": <%= current_user.id %> }
+</script>
+
+
+
 <div id="content">
   <script> 
-  $(Memoboat.initialize())
+    $(function () {
+
+      var div = $('<div>');
+      div.html($('#bootstrapped-data').text());
+
+      var bsData = JSON.parse(div.text());
+      var userId = bsData["userID"];
+
+      Memoboat.initialize(userId)
+
+    })
   </script>
 </div

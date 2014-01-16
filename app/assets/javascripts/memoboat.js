@@ -3,8 +3,13 @@ window.Memoboat = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function () {
-    new Memoboat.Routers.Router();
+  Data: {},
+  initialize: function (userId) {
+    Memoboat.Data.userId = userId;
+
+    new Memoboat.Routers.Router({
+      $rootEl: $('#content')
+    });
     Backbone.history.start();
   }
 }; 
