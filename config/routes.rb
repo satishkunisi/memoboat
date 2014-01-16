@@ -2,6 +2,8 @@ Memoboat::Application.routes.draw do
   resources :users
   resource :session
 
+  root to: "static_pages#root"
+
   namespace :api, :defaults => {:format => :json} do 
     resources :notebooks, :except => [:new, :edit] do 
       resources :memos, :except => [:new, :edit]

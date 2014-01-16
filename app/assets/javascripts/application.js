@@ -12,7 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require underscore
-//= require backbone
+//= require underscore-min
+//= require backbone-min
 //= require bootstrap
+//= require memoboat
+//= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./routers
+//= require_tree ./views
 //= require_tree .
