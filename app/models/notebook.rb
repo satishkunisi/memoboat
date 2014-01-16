@@ -9,4 +9,9 @@ class Notebook < ActiveRecord::Base
              :foreign_key => :user_id,
              :primary_key => :id
 
+  has_many :memos,
+           :class_name => "Memo",
+           :foreign_key => :notebook_id,
+           :primary_key => :id
+
 end
