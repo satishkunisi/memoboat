@@ -4,23 +4,34 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   },
 
   events: {
-    "mouseenter .caret": "showDropdown",
-    "mouseleave .caret": "hideDropdown"
+    "click .list-group button": "showDropdown",
+    "click .dropdown-menu a": "dropdownAction"
   },
 
   template: JST["notebook-sidebar"],
 
+  dropdownAction: function (event) {
+    var notebookId = $(event.target).data('id');
+    var action = $(event.target).data('action')
+
+    if (action === "delete") {
+      var notebook = this.collection.get(notebookId);
+      notebook.destroy();
+    } else if (action === "properties") {
+      //...
+    }
+  },
+
+  showDropdown: function (event) {
+    var notebookId = $(event.target).data('id');
+
+    console.log($('#nb-menu-' + notebookId));
+    $('#nb-menu-' + notebookId).toggle();
+  },
+
   className: "col-xs-2",
 
   id: "notebook-sidebar",
-
-  showDropdown: function (event) {
-    console.log('hi')
-  },
-
-  hideDropdown: function (event) {
-    console.log("bye");
-  },
 
   render: function () {
 

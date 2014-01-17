@@ -4,19 +4,19 @@
       <span class="listgroup-item-heading">
         <%= notebook.get('title') %>
       </span>
-        <span class="caret pull-right dropdown-toggle"></span>
+      <button type="button" data-id="<%= notebook.id %>" class="btn btn-default btn-xs pull-right">
+        <span class="caret"></span>
+      </button>
     </a>
-    <div class="dropdown" data-id="<% notebook.id %>">
-      <ul class="dropdown-menu" role="menu" aria-labelledby="notebook-dropdown">
-        <li role="presentation">
-          <a role="menuitem"
-             data-action="properties"
-             data-id="<%= notebook.id %>"
-             tabindex="-1" href="#">
-             Properties
-          </a>
-        </li>
-      </ul>
-    </div>
+    <ul class="dropdown-menu pull-right" id="nb-menu-<%= notebook.id %>">
+      <li>
+        <a role="menuitem"
+           data-action="delete"
+           data-id="<%= notebook.id %>"
+           tabindex="-1" href="#">
+           Delete
+        </a>
+      </li>
+    </ul>
   <% }) %>
 </div>
