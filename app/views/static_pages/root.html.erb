@@ -3,19 +3,20 @@
 </script>
 
 
+<div class="containter">
+  <div id="content">
+    <script> 
+      $(function () {
 
-<div id="content">
-  <script> 
-    $(function () {
+        var div = $('<div>');
+        div.html($('#bootstrapped-data').text());
 
-      var div = $('<div>');
-      div.html($('#bootstrapped-data').text());
+        var bsData = JSON.parse(div.text());
+        var userId = bsData["userID"];
 
-      var bsData = JSON.parse(div.text());
-      var userId = bsData["userID"];
+        Memoboat.initialize(userId)
 
-      Memoboat.initialize(userId)
-
-    })
-  </script>
-</div
+      })
+    </script>
+  </div>
+</div>

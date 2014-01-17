@@ -1,21 +1,44 @@
 Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   initialize: function () {
-    //this.listenTo();
+    this.listenTo(this.collection, "add change remove reset sync", this.render);
+  },
+
+  events: {
+    "mouseenter .caret": "showDropdown",
+    "mouseleave .caret": "hideDropdown"
   },
 
   template: JST["notebook-sidebar"],
 
-  className: "list-group col-xs-2",
+  className: "col-xs-2",
 
   id: "notebook-sidebar",
 
+  showDropdown: function (event) {
+    console.log('hi')
+  },
+
+  hideDropdown: function (event) {
+    console.log("bye");
+  },
+
   render: function () {
 
-    var renderedContent = this.template({
+    var notebooksList = this.template({
       notebooks: Memoboat.notebooks
     });
 
-    this.$el.html(renderedContent);
+    this.$el.html(notebooksList);
+
+    var newNotebook = new Memoboat.Models.Notebook();
+
+    var view = new Memoboat.Views.AddNotebook({
+      model: newNotebook,
+      collection: this.collection
+    });
+
+    this.$el.prepend(view.render().$el);
+
     return this;
   }
 

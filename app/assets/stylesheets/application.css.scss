@@ -13,3 +13,18 @@
  */
 
 @import "bootstrap";
+
+#add-notebook-form input {
+  width: 130px;
+  float: right;
+}
+
+#add-notebook-form button {
+  width: 50px;
+  float: right;
+}
+
+
+#notebooks-sidebar span.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}

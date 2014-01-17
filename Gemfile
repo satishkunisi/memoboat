@@ -9,6 +9,7 @@ group :assets do
   gem 'jbuilder'
   gem 'uglifier', '>= 1.0.3'
   gem 'ejs'
+  gem 'bootstrap-sass'
 end
 
 gem 'jquery-rails'

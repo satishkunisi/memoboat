@@ -1,7 +1,22 @@
-<% notebooks.forEach(function (notebook) { %>
-  <a href="#" class="list-group-item" data-id="<%= notebook.id %>">
-    <span class="listgroup-item-heading">
-      <%= notebook.get('title') %>
-    </h4>
-  </a>
-<% }) %>
+<div class="list-group">
+  <% notebooks.forEach(function (notebook) { %>
+    <a href="#" class="list-group-item" data-id="<%= notebook.id %>">
+      <span class="listgroup-item-heading">
+        <%= notebook.get('title') %>
+      </span>
+        <span class="caret pull-right dropdown-toggle"></span>
+    </a>
+    <div class="dropdown" data-id="<% notebook.id %>">
+      <ul class="dropdown-menu" role="menu" aria-labelledby="notebook-dropdown">
+        <li role="presentation">
+          <a role="menuitem"
+             data-action="properties"
+             data-id="<%= notebook.id %>"
+             tabindex="-1" href="#">
+             Properties
+          </a>
+        </li>
+      </ul>
+    </div>
+  <% }) %>
+</div>

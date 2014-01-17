@@ -11,11 +11,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
 
   mainView: function () {
     this.installNotebooks();
-    //this.installMemos();
-    //this.installEditor();
   },
-
- 
 
   installNotebooks: function () {
     var that = this;
@@ -27,13 +23,31 @@ Memoboat.Routers.Router = Backbone.Router.extend({
         })
 
         that.$rootEl.append(nbSidebar.render().$el);
+
+        var notebookId = Memoboat.notebooks.first().id;
+        that.installMemos(notebookId);
       }
     })
     
   },
 
-  installMemos: function () {
+  installMemos: function (notebookId) {
+    var that = this;
 
+    var memos = new Memoboat.Collections.Memos({
+      notebookId: notebookId
+    });
+
+    memos.fetch({
+      success: function () {
+        var memosSidebar = new Memoboat.Views.MemoSidebar({
+          collection: memos
+        });
+
+        that.$rootEl.append(memosSidebar.render().$el);
+        //this.installEditor();
+      }
+    });
   },
 
   installEditor: function () {

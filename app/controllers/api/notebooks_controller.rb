@@ -6,7 +6,13 @@ class Api::NotebooksController < ApplicationController
   end
 
   def create
-    @notebook = Notebook.new(params[:notebook])
+    @notebook = current_user.notebooks.new(params[:notebook])
+
+    if @notebook.save
+      render :create
+    else
+      render :status => 500
+    end
   end
 
   def destroy
