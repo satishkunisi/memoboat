@@ -12,7 +12,8 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   template: JST["notebook-sidebar"],
 
   showMemos: function (event) {
-
+    var notebookId = $(event.target).data('id')
+    Backbone.history.navigate("notebooks/" + notebookId, { trigger: true})
   },
 
   dropdownAction: function (event) {
