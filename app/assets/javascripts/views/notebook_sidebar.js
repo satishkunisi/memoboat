@@ -5,7 +5,8 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
 
   events: {
     "click .list-group button": "showDropdown",
-    "click .dropdown-menu a": "dropdownAction"
+    "click .dropdown-menu a": "dropdownAction",
+    "click .list-group-item": "showMemos"
   },
 
   template: JST["notebook-sidebar"],
@@ -13,6 +14,7 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   dropdownAction: function (event) {
     var notebookId = $(event.target).data('id');
     var action = $(event.target).data('action')
+    var dropdown = $(event.target).closest('.dropdown-menu');
 
     if (action === "delete") {
       var notebook = this.collection.get(notebookId);
@@ -20,6 +22,9 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
     } else if (action === "properties") {
       //...
     }
+
+    dropdown.toggle();
+
   },
 
   showDropdown: function (event) {
@@ -27,6 +32,11 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
 
     console.log($('#nb-menu-' + notebookId));
     $('#nb-menu-' + notebookId).toggle();
+  },
+
+  closeDropdown: function (event) {
+    console.log("hiding")
+    $('.dropdown-menu').hide();
   },
 
   className: "col-xs-2",
