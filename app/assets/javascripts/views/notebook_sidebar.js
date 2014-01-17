@@ -11,6 +11,10 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
 
   template: JST["notebook-sidebar"],
 
+  showMemos: function (event) {
+
+  },
+
   dropdownAction: function (event) {
     var notebookId = $(event.target).data('id');
     var action = $(event.target).data('action')
