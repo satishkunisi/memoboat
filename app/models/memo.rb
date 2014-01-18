@@ -1,8 +1,10 @@
 class Memo < ActiveRecord::Base
   attr_accessible :title, :body, :notebook_id
 
-  validates :title, :body, :notebook_id, :presence => true
+  validates :title, :notebook_id, :presence => true
   validates :body, :length => {:maximum => 4000}
+
+  before_validation :generate_default_title
 
   belongs_to :notebook,
              :class_name => "Notebook",
@@ -10,5 +12,16 @@ class Memo < ActiveRecord::Base
              :primary_key => :id
 
   has_one :author, :through => :notebooks, :source => :user
+
+  def generate_default_title
+    return nil if self.title
+    random_title = "Untitled Note #{Time.now.to_i}"
+
+    if Memo.find_by_title(random_title)
+      generate_default_title
+    else 
+      self.title = random_title
+    end
+  end
   
 end

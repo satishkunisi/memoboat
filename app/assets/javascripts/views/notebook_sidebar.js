@@ -12,11 +12,15 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   template: JST["notebook-sidebar"],
 
   showMemos: function (event) {
+    event.preventDefault();
+
     var notebookId = $(event.target).data('id')
     Backbone.history.navigate("notebooks/" + notebookId, { trigger: true})
   },
 
   dropdownAction: function (event) {
+    event.preventDefault();
+
     var notebookId = $(event.target).data('id');
     var action = $(event.target).data('action')
     var dropdown = $(event.target).closest('.dropdown-menu');
@@ -33,6 +37,8 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   },
 
   showDropdown: function (event) {
+    event.preventDefault();
+    
     var notebookId = $(event.target).data('id');
 
     console.log($('#nb-menu-' + notebookId));

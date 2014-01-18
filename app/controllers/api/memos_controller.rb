@@ -7,6 +7,14 @@ class Api::MemosController < ApplicationController
   end
 
   def create
+    @memo = Memo.new(params[:memo])
+    @memo.notebook_id = params[:notebook_id]
+
+    if @memo.save
+      render :create
+    else
+      render :status => 500
+    end
   end
 
   def show
@@ -14,6 +22,13 @@ class Api::MemosController < ApplicationController
   end
 
   def update
+    @memo = Memo.find(params[:id])
+
+    if @memo.update_attributes(params[:memo])
+      render :update
+    else
+      render :status => 500
+    end
   end
 
   def destroy

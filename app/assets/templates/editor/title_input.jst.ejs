@@ -1,0 +1,13 @@
+<% if (memo) { %>
+<%   var title_content = memo.get('title')  %>
+<% } else { %>
+<%   var title_content = "" %>
+<% } %>
+
+<input type="text" 
+           class="form-control" 
+           id="memo_title" 
+           name="memo[title]" 
+           placeholder="Enter Title"
+           value="<%= title_content %>">
+<br />
