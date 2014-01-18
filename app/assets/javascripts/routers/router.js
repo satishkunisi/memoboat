@@ -13,7 +13,16 @@ Memoboat.Routers.Router = Backbone.Router.extend({
 
   mainView: function () {
     var that = this;
-    
+
+    this.installNotebooksSidebar(function () {
+      var firstNbId = Memoboat.notebooks.first().id;
+      that.switchNotebook(firstNbId);
+    });
+  },
+
+  installNotebooksSidebar: function (callback) {
+    var that = this;
+
     Memoboat.notebooks.fetch({
       success: function () {
         var nbSidebar = new Memoboat.Views.NotebookSidebar({
@@ -21,9 +30,11 @@ Memoboat.Routers.Router = Backbone.Router.extend({
         });
 
         that.$rootEl.append(nbSidebar.render().$el);
-        var firstNbId = Memoboat.notebooks.first().id;
 
-        Backbone.history.navigate("notebooks/" + firstNbId, {trigger: true})
+        if (callback) {
+          callback();
+        }
+
       }
     });
   },
@@ -39,27 +50,39 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   switchNotebook: function (id, memoId) {
     var that = this;
 
-    var memos = new Memoboat.Collections.Memos({
-      notebookId: id
-    });
+    function createMemoSidebar () {
+      var memos = new Memoboat.Collections.Memos({
+        notebookId: id
+      });
 
-    memos.fetch({
-      success: function () {
-        var memoList = new Memoboat.Views.MemoSidebar({
-          collection: memos
-        });
+      memos.fetch({
+        success: function () {
+          var memoList = new Memoboat.Views.MemoSidebar({
+            collection: memos
+          });
 
-        that._swapMemoList(memoList);
-        that.switchEditor(memos, memoId); 
-      }
-    })
+          that._swapMemoList(memoList);
+          that.switchEditor(memos, memoId); 
+        }
+      })
+
+    }
+
+    if ($('#notebook-sidebar').length === 0) {
+      this.installNotebooksSidebar(createMemoSidebar);
+    } else {
+      createMemoSidebar();
+    }
+
   },
 
   switchMemo: function (notebookId, id) {
-    if (this._currentMemoList.collection.notebookId === notebookId) {
+    if ($('#memo-sidebar').length === 0) {
+      this.switchNotebook(notebookId, id);
+    } else if (this._currentMemoList.collection.notebookId === notebookId) {
       this.switchEditor(this._currentMemoList.collection, id);
     } else {
-      switchNotebook(notebookId)
+      this.switchNotebook(notebookId, id)
     }
   },
 

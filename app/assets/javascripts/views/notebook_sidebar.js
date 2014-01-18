@@ -14,6 +14,12 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   showMemos: function (event) {
     event.preventDefault();
 
+    if ($(event.target) === this._activeMemo) {
+      return;
+    }
+
+    this._swapActiveMemo($(event.target));
+
     var notebookId = $(event.target).data('id')
     Backbone.history.navigate("notebooks/" + notebookId, { trigger: true})
   },
@@ -72,6 +78,16 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
     this.$el.prepend(view.render().$el);
 
     return this;
+  },
+
+   _swapActiveMemo: function ($li) {
+     this._activeMemo && this._activeMemo.removeClass('active');
+     this._activeMemo = $li;
+     $li.addClass('active');
+  },
+
+  _restoreActiveMemo: function () {
+    this._activeMemo && this._activeMemo.addClass('active');
   }
 
 })
