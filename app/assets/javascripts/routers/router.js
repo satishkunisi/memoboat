@@ -1,11 +1,7 @@
 Memoboat.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
-    var that = this;
-
     this.$rootEl = options.$rootEl;
     Memoboat.notebooks = new Memoboat.Collections.Notebooks();
-    this.mainView();
-    
   },
 
   routes: {
@@ -16,7 +12,8 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   },
 
   mainView: function () {
-
+    var that = this;
+    
     Memoboat.notebooks.fetch({
       success: function () {
         var nbSidebar = new Memoboat.Views.NotebookSidebar({
@@ -32,7 +29,11 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   },
 
   newMemo: function (id) {
-    //...
+    var memos = new Memoboat.Collections.Memos({
+      notebookId: id
+    });
+
+    this.switchEditor(memos);
   },
 
   switchNotebook: function (id, memoId) {

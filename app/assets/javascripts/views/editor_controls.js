@@ -13,7 +13,23 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
 
 
   newMemo: function (event) {
-    Backbone.history.navigate("notebooks/" + this.collection.notebookId + "/memos/new")
+    event.preventDefault();
+
+    var notebookId = this.collection.notebookId;
+    Backbone.history.navigate("notebooks/" + notebookId + "/memos/new", {trigger: true});
+  },
+
+  trashMemo: function (event) {
+    event.preventDefault();
+
+    this.model.collection = this.collection;
+    this.model.destroy();
+  },
+
+  saveMemo: function (event) {
+    event.preventDefault();
+
+    this.model.save();
   },
 
   render: function () {

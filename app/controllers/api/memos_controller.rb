@@ -32,6 +32,8 @@ class Api::MemosController < ApplicationController
   end
 
   def destroy
+     @memo = Memo.find(params[:id])
+     @memo.destroy
   end
 
   def require_authorization

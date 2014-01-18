@@ -4,7 +4,7 @@ Memoboat::Application.routes.draw do
 
   root to: "static_pages#root"
 
-  namespace :api, :defaults => {:format => :json} do 
+  namespace :api do 
     resources :notebooks, :except => [:new, :edit] do 
       resources :memos, :except => [:new, :edit]
     end

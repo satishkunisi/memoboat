@@ -1,1 +1,1 @@
-json.(@memo, :id, :title, :body, :notebook_id, :created_at, :updated_at)
+json.(@memo, :id, :title, :body, :created_at, :updated_at)
