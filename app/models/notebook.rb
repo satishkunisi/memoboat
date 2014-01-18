@@ -1,7 +1,7 @@
 class Notebook < ActiveRecord::Base
   attr_accessible :title, :user_id
 
-  validates :title, :presence => true, :uniqueness => {:scope => :user_id}
+  validates :title, :presence => true, :uniqueness => { :scope => :user_id }
   validates :user_id, :presence => true, :numericality => true
 
   belongs_to :user,
