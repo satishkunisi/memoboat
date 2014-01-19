@@ -4,8 +4,7 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   },
 
   events: {
-    "click .list-group button": "showDropdown",
-    "click .dropdown-menu a": "dropdownAction",
+    "click span.close": "deleteNotebook",
     "click .list-group-item": "showMemos"
   },
 
@@ -14,46 +13,32 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   showMemos: function (event) {
     event.preventDefault();
 
-    if ($(event.target) === this._activeMemo) {
+    if ($(event.target) === this._ActiveNotebook) {
       return;
     }
 
-    this._swapActiveMemo($(event.target));
+    this._swapActiveNotebook($(event.target));
 
     var notebookId = $(event.target).data('id')
     Backbone.history.navigate("notebooks/" + notebookId, { trigger: true})
   },
 
-  dropdownAction: function (event) {
+  deleteNotebook: function (event) {
     event.preventDefault();
+    var that = this;
 
     var notebookId = $(event.target).data('id');
-    var action = $(event.target).data('action')
-    var dropdown = $(event.target).closest('.dropdown-menu');
+    var notebook = this.collection.get(notebookId);
 
-    if (action === "delete") {
-      var notebook = this.collection.get(notebookId);
-      notebook.destroy();
-    } else if (action === "properties") {
-      //...
-    }
-
-    dropdown.toggle();
-
-  },
-
-  showDropdown: function (event) {
-    event.preventDefault();
-    
-    var notebookId = $(event.target).data('id');
-
-    console.log($('#nb-menu-' + notebookId));
-    $('#nb-menu-' + notebookId).toggle();
-  },
-
-  closeDropdown: function (event) {
-    console.log("hiding")
-    $('.dropdown-menu').hide();
+    notebook.destroy({
+      success: function () {
+        // how to redirect to first item in this collection?
+        if ( notebook.id === $(that._ActiveNotebook).data('id')) {
+          var newNotebookId = $('.list-group-item').first().data('id');
+          that._swapActiveNotebook($('.list-group-item').first());
+        }
+      }
+    });
   },
 
   className: "col-xs-2",
@@ -80,14 +65,14 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
     return this;
   },
 
-   _swapActiveMemo: function ($li) {
-     this._activeMemo && this._activeMemo.removeClass('active');
-     this._activeMemo = $li;
+   _swapActiveNotebook: function ($li) {
+     this._ActiveNotebook && this._ActiveNotebook.removeClass('active');
+     this._ActiveNotebook = $li;
      $li.addClass('active');
   },
 
-  _restoreActiveMemo: function () {
-    this._activeMemo && this._activeMemo.addClass('active');
+  _restoreActiveNotebook: function () {
+    this._ActiveNotebook && this._ActiveNotebook.addClass('active');
   }
 
 })

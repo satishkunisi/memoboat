@@ -8,6 +8,10 @@ Memoboat.Collections.Memos = Backbone.Collection.extend({
 
   url: function () {
     return "/api/notebooks/" + this.notebookId + "/memos"
+  },
+
+  comparator: function (memo) {
+    return memo.updatedAt;
   }
   
 })

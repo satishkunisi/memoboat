@@ -1,0 +1,30 @@
+<ul class="dropdown-menu pull-right" id="nb-menu-<%= notebook.id %>">
+  <li>
+    <a role="menuitem"
+       data-action="delete"
+       data-id="<%= notebook.id %>"
+       id="notebook-delete"
+       tabindex="-1" href="#">
+       Delete
+    </a>
+  </li>
+  <li>
+    <a role="menuitem"
+       data-action="rename"
+       data-id="<%= notebook.id %>"
+       id="notebook-rename"
+       tabindex="-1" href="#">
+       Rename
+    </a>
+  </li>
+  <li class="divider"></li>
+   <li>
+    <a role="menuitem"
+       data-action="close"
+       data-id="<%= notebook.id %>"
+       id="menu-close"
+       tabindex="-1" href="#">
+       Close
+    </a>
+  </li>
+</ul>
