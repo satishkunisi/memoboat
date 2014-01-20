@@ -7,7 +7,6 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "mainView",
     "notebooks/:id": "switchNotebook",
-    "notebooks/:id/memos/new": "newMemo",
     "notebooks/:notebookId/memos/:id": "switchMemo"
   },
 
@@ -37,14 +36,6 @@ Memoboat.Routers.Router = Backbone.Router.extend({
 
       }
     });
-  },
-
-  newMemo: function (id) {
-    var memos = new Memoboat.Collections.Memos({
-      notebookId: id
-    });
-
-    this.switchEditor(memos);
   },
 
   switchNotebook: function (id, memoId) {

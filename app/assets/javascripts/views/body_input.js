@@ -3,6 +3,8 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
     this.listenTo(this.model, "add change remove reset", this.render)
   },
 
+  template: JST['editor/body_input'],
+
   events: {
     "change textarea": "saveNote"
   },
@@ -10,16 +12,16 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   saveNote: function (event) {
     event.preventDefault();
 
+    var that = this;
     var bodyData = $(event.target).serializeJSON();
 
     if (this.model.isNew()) {
-      this.collection.create(bodyData["memo"])
+      this.model.set(bodyData["memo"])
+      this.collection.create(this.model);
     } else {
       this.model.save(bodyData["memo"]);
     }
   },
-
-  template: JST['editor/body_input'],
 
   render: function () {
     var renderedContent = this.template({

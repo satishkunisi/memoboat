@@ -7,7 +7,7 @@ window.Memoboat = {
   initialize: function (userId) {
     Memoboat.Data.userId = userId;
 
-    new Memoboat.Routers.Router({
+    Memoboat.Routers.router = new Memoboat.Routers.Router({
       $rootEl: $('#content')
     });
     Backbone.history.start();

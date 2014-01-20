@@ -1,4 +1,9 @@
 Memoboat.Views.Editor = Backbone.View.extend({
+  initialize: function () {
+    this.listenTo(this.model, "all", this.render)
+    this.listenTo(this.collection, "all", this.render)
+  },
+
   className: "col-xs-6",
 
   id: "editor",
@@ -30,6 +35,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
     $(editorForm).append(titleInput.render().$el)
                  .append(bodyInput.render().$el)
                  .prepend(controls.render().$el);
+                 
     var renderedContent = $(mainContent).append(editorForm)
  
     this.$el.html(renderedContent);
