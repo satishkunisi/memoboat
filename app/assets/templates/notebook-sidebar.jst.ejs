@@ -1,6 +1,12 @@
 <div class="list-group">
   <% notebooks.forEach(function (notebook) { %>
-    <a href="#" class="list-group-item notebook-item" data-id="<%= notebook.id %>">
+    <a href="#" data-id="<%= notebook.id %>" 
+      <% if (startNotebook === notebook.id) { %>
+        class="list-group-item notebook-item active">
+      <% } else { %>
+        class="list-group-item notebook-item">
+      <% } %>
+  
       <span class="listgroup-item-heading">
         <%= notebook.get('title') %>
       </span>

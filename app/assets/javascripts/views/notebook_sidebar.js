@@ -1,6 +1,13 @@
 Memoboat.Views.NotebookSidebar = Backbone.View.extend({
-  initialize: function () {
+  initialize: function (options) {
     this.listenTo(this.collection, "add change remove reset sync", this.render);
+
+    if (!options.activeNotebook) {
+      this.startNotebook = this.collection.first().id
+    } else {
+      this.startNotebook = options.activeNotebook;
+    }
+  
   },
 
   events: {
@@ -13,7 +20,7 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   showMemos: function (event) {
     event.preventDefault();
 
-    if ($(event.target) === this._ActiveNotebook) {
+    if ($(event.target) === this._activeNotebook) {
       return;
     }
 
@@ -33,7 +40,7 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
     notebook.destroy({
       success: function () {
         // how to redirect to first item in this collection?
-        if ( notebook.id === $(that._ActiveNotebook).data('id')) {
+        if ( notebook.id === $(that._activeNotebook).data('id')) {
           var newNotebookId = $('.list-group-item').first().data('id');
           that._swapActiveNotebook($('.list-group-item').first());
         }
@@ -48,18 +55,19 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   render: function () {
 
     var notebooksList = this.template({
-      notebooks: Memoboat.notebooks
+      notebooks: Memoboat.notebooks,
+      startNotebook: this.startNotebook
     });
 
     this.$el.html(notebooksList);
 
-    var newNotebook = new Memoboat.Models.Notebook();
+    this._activeNotebook = this.$el.find("a.active");
 
+    var newNotebook = new Memoboat.Models.Notebook();
     var view = new Memoboat.Views.AddNotebook({
       model: newNotebook,
       collection: this.collection
     });
-
     this.$el.prepend(view.render().$el);
 
     this.makeNotebooksDroppable();
@@ -105,13 +113,13 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
   },
 
    _swapActiveNotebook: function ($li) {
-     this._ActiveNotebook && this._ActiveNotebook.removeClass('active');
-     this._ActiveNotebook = $li;
+     this._activeNotebook && this._activeNotebook.removeClass('active');
+     this._activeNotebook = $li;
      $li.addClass('active');
   },
 
   _restoreActiveNotebook: function () {
-    this._ActiveNotebook && this._ActiveNotebook.addClass('active');
+    this._activeNotebook && this._activeNotebook.addClass('active');
   }
 
 })

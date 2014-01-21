@@ -19,13 +19,15 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     });
   },
 
-  installNotebooksSidebar: function (callback) {
+  installNotebooksSidebar: function (callback, activeNotebook) {
+
     var that = this;
 
     Memoboat.notebooks.fetch({
       success: function () {
         var nbSidebar = new Memoboat.Views.NotebookSidebar({
-          collection: Memoboat.notebooks
+          collection: Memoboat.notebooks,
+          activeNotebook: activeNotebook
         });
 
         that.$rootEl.append(nbSidebar.render().$el);
@@ -51,7 +53,6 @@ Memoboat.Routers.Router = Backbone.Router.extend({
           var memoList = new Memoboat.Views.MemoSidebar({
             collection: memos
           });
-
           that._swapMemoList(memoList);
           that.switchEditor(memos, memoId); 
         }
@@ -60,7 +61,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     }
 
     if ($('#notebook-sidebar').length === 0) {
-      this.installNotebooksSidebar(createMemoSidebar);
+      this.installNotebooksSidebar(createMemoSidebar, id);
     } else {
       createMemoSidebar();
     }
