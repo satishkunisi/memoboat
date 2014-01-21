@@ -62,7 +62,46 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
 
     this.$el.prepend(view.render().$el);
 
+    this.makeNotebooksDroppable();
+
     return this;
+  },
+
+  makeNotebooksDroppable: function () {
+    this.$el.find('.notebook-item').droppable({
+      accept: ".memo-item",
+      hoverClass: "active",
+      drop: function (event, ui) {
+        var currentNotebookId = ui.draggable.data('nb-id');
+        var targetNotebookId = $(event.target).data('id')
+
+        if (currentNotebookId !== targetNotebookId) {
+          var memoId = ui.draggable.data('id');
+
+          var oldCollection = new Memoboat.Collections.Memos({
+            notebookId: currentNotebookId
+          })
+
+          function removeFromOldCollection () {
+            Memoboat.Vents.vent.trigger("memo:changeNotebook", {
+              memoId: memoId
+            });
+          }
+
+          function changeNotebook () {
+            var memo = oldCollection.get(memoId);
+            memo.set({notebook_id: targetNotebookId})
+            memo.save({notebook_id: targetNotebookId}, {
+              success: removeFromOldCollection
+            })
+          }
+
+          oldCollection.fetch({
+            success: changeNotebook
+          });
+        } 
+      }
+    });
   },
 
    _swapActiveNotebook: function ($li) {
