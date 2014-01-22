@@ -1,18 +1,2 @@
-<div class="list-group">
-  <% notebooks.forEach(function (notebook) { %>
-    <a href="#" data-id="<%= notebook.id %>" 
-      <% if (startNotebook === notebook.id) { %>
-        class="list-group-item notebook-item active">
-      <% } else { %>
-        class="list-group-item notebook-item">
-      <% } %>
-  
-      <span class="listgroup-item-heading">
-        <%= notebook.get('title') %>
-      </span>
-      <span data-id="<%= notebook.id %>" class="close pull-right">
-        &times;
-      </span>
-    </a>
-  <% }) %>
-</div>
+<h3>Notebooks</h3>
+<br/>

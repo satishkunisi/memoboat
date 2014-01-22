@@ -13,6 +13,9 @@ class Memo < ActiveRecord::Base
 
   has_one :author, :through => :notebooks, :source => :user
 
+  has_many :taggings
+  has_many :tags, :through => :taggings, :source => :tag
+
   def generate_default_title
     return nil if self.title
     random_title = "Untitled Note #{Time.now.to_i}"

@@ -1,1 +1,3 @@
-json.array! @memos, :id, :title, :body, :notebook_id, :created_at, :updated_at
+json.array! @memos do |memo|
+  json.partial!("memo", memo: memo)
+end

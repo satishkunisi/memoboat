@@ -1,9 +1,11 @@
 Memoboat.Views.MemoSidebar = Backbone.View.extend({
 
-  initialize: function () {
-    this.listenTo(this.collection, "add change remove reset", this.render);
+  initialize: function (options) {
     var that = this;
+    this.notebookTitle = options.notebookTitle;
 
+    this.listenTo(this.collection, "add change remove reset", this.render);
+   
     Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
       that.removeMemo(memoId);
     })
@@ -19,9 +21,9 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
 
   id: "memo-sidebar",
 
-  removeMemo: function (memoId) {
-    var memo = this.collection.get(memoId);
-    this.collection.remove(memo).fetch();
+  removeMemo: function (options) {
+    var memo = this.collection.get(options.memoId);
+    this.collection.remove(memo);
   },  
 
   showMemo: function (event) {
@@ -36,7 +38,8 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
 
   render: function () {
     var renderedContent = this.template({
-      memos: this.collection
+      memos: this.collection,
+      notebookTitle: this.notebookTitle
     });
 
     this.$el.html(renderedContent);
@@ -49,9 +52,8 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
   makeMemosDraggable: function () {
     this.$el.find('.list-group-item').draggable({
       revert: true,
-      revertDuration: 200 
+      revertDuration: 200
     });
-
   },
 
   _swapActiveMemo: function ($memo) {

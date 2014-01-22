@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
            :dependent => :destroy
 
   has_many :memos, :through => :notebooks, :source => :memos
+  has_many :tags
   
   def self.find_by_credentials(user_params)
     user = User.find_by_email(user_params[:email])

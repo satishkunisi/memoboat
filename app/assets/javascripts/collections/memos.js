@@ -1,6 +1,7 @@
 Memoboat.Collections.Memos = Backbone.Collection.extend({
   
-  initialize: function (options) {
+  // TODO: models, options
+  initialize: function (models, options) {
     this.notebookId = options.notebookId;
   },
 

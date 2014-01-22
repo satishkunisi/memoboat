@@ -14,6 +14,8 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
 
     var that = this;
     var bodyData = $(event.target).serializeJSON();
+    var notebookId = $("#memo_notebook_id").val();
+    bodyData["memo"]["notebook_id"] = notebookId;
 
     if (this.model.isNew()) {
       this.model.set(bodyData["memo"])

@@ -1,0 +1,11 @@
+<h3>Tags</h3>
+<div class="list-group">
+  <% tags.forEach(function (tag) { %>
+    <a href="#" data-id="<%= tag.id %>" class="list-group-item"> 
+      <span class="listgroup-item-heading">
+        <span class="glyphicon glyphicon-tag"></span>
+        <%= tag.get('name') %>
+      </span>
+    </a>
+  <% }) %>
+</div>

@@ -13,7 +13,8 @@ Memoboat.Views.Editor = Backbone.View.extend({
   render: function () {
 
     var mainContent = this.template({
-      memo: this.model
+      memo: this.model,
+      notebookId: this.collection.notebookId
     });
 
     var controls = new Memoboat.Views.EditorControls({
