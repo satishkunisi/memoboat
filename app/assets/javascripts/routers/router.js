@@ -116,6 +116,11 @@ Memoboat.Routers.Router = Backbone.Router.extend({
    _swapEditor: function (view) {
     this._currentEditor && this._currentEditor.remove();
     this._currentEditor = view;
-    $('#memo-sidebar').after(view.render().$el)
+    $('#memo-sidebar').after(view.render().$el);
+
+    // $('.typeahead').typeahead({
+    //   name: "hi",
+    //   local: ["yo", "yourself", "meow"]
+    // });
   }
 })

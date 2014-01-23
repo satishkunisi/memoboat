@@ -1,0 +1,1 @@
+json.(@tagging, :memo_id, :tag_id)

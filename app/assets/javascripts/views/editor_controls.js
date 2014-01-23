@@ -1,4 +1,8 @@
 Memoboat.Views.EditorControls = Backbone.View.extend({
+  initialize: function () {
+    this.listenTo(this.model, "destroy change sync", this.render)
+  },
+
   events: {
     "click button#memo-new": "newMemo",
     "click button#memo-trash": "trashMemo",
@@ -7,12 +11,12 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
 
   template: JST['editor/controls'],
 
+  className: "col-xs-6",
 
   newMemo: function (event) {
     event.preventDefault();
     var notebookId = this.collection.notebookId;
     Memoboat.Routers.router.switchEditor(this.collection);
-    Backbone.history.navigate("notebooks/" + notebookId);
   },
 
   trashMemo: function (event) {
@@ -23,7 +27,7 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
     this.model.destroy({
       success: function () {
         var notebookId = that.collection.notebookId;
-        Backbone.history.navigate("notebooks/" + notebookId, {trigger: true});
+        Memoboat.Routers.router.switchNotebook(notebookId);
       }
     });
   },

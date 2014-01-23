@@ -1,0 +1,17 @@
+<h4>Memo Tags</h4>
+<ul class="list-inline pull-left">
+  <% tags.forEach(function (tag) { %>
+    <%= tag.get('name') %>
+    <li class="btn-group">
+      <button type="button" 
+              class="btn btn-default btn-xs" 
+              data-id="<%= tag.id %>">
+              &times;
+      </button>
+      <button class="btn btn-default btn-xs" 
+              data-id="<%= tag.id %>">
+              <%= tag.get('name') %> 
+      </button>
+    </li>
+  <% }) %>
+</ul>

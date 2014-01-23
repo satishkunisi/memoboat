@@ -1,6 +1,6 @@
 Memoboat.Views.TitleInput = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "all", this.render)
+    this.listenTo(this.model, "change remove sync", this.render)
   },
 
   events: {

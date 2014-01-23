@@ -1,4 +1,7 @@
 Memoboat.Views.TagList = Backbone.View.extend({
+  initialize: function () {
+    this.listenTo(this.collection, "add change remove sync", this.render)
+  },
 
   template: JST["tag_list"],
 
@@ -9,6 +12,6 @@ Memoboat.Views.TagList = Backbone.View.extend({
 
     this.$el.html(renderedContent);
 
-    return this
+    return this;
   }
 })

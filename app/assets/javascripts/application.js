@@ -14,8 +14,9 @@
 //= require jquery_ujs
 //= require jquery_serializeJSON
 //= require jquery-ui
-//= require underscore-min
+//= require underscore.min
 //= require backbone
+//= require typeahead
 //= require bootstrap
 //= require memoboat
 //= require_tree ../templates

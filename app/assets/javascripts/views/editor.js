@@ -1,7 +1,6 @@
 Memoboat.Views.Editor = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "all", this.render)
-    this.listenTo(this.collection, "all", this.render)
+    this.listenTo(this.model, "sync", this.render)
   },
 
   className: "col-xs-6",
@@ -15,6 +14,10 @@ Memoboat.Views.Editor = Backbone.View.extend({
     var mainContent = this.template({
       memo: this.model,
       notebookId: this.collection.notebookId
+    });
+
+    var memoTagForm = new Memoboat.Views.MemoTagForm({
+      model: this.model
     });
 
     var controls = new Memoboat.Views.EditorControls({
@@ -33,7 +36,8 @@ Memoboat.Views.Editor = Backbone.View.extend({
     });
 
     var editorForm = $("<form>").addClass("form-horizontal");
-    $(editorForm).append(titleInput.render().$el)
+    $(editorForm).append(memoTagForm.render().$el)
+                 .append(titleInput.render().$el)
                  .append(bodyInput.render().$el)
                  .prepend(controls.render().$el);
                  

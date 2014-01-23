@@ -11,14 +11,18 @@ Memoboat.Models.Memo = Backbone.Model.extend({
     
   },
 
-  parse : function (attributes) {
-    if (attributes.tags) {
-      Memoboat.userTags.add(attributes.tags)
-      attributes.tags = new Memoboat.Collections.Tags(attributes.tags, {
-        memoId: attributes.id
-      })
-    }
+  parse: function (attributes) {
+    Memoboat.userTags.add(attributes.tags)
+    attributes.tags = new Memoboat.Collections.Tags(attributes.tags, {
+      memoId: attributes.id
+    });
 
+    return attributes;
+  },
+
+  toJSON: function () {
+    var attributes = _.clone(this.attributes);
+    delete attributes.tags;
     return attributes;
   }
 })

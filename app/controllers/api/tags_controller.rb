@@ -4,11 +4,9 @@ class Api::TagsController < ApplicationController
   end
   
   def create
-    memo_id = params[:memo_id]
     user_id = current_user.id
 
-    @tag = Tag.new(params[:tag])
-    @tag.taggings.build(:memo_id => memo_id)
+    @tag = current_user.tags.build(params[:tag])
 
     if @tag.save
       render :create

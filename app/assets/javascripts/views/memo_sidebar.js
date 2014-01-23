@@ -51,8 +51,9 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
 
   makeMemosDraggable: function () {
     this.$el.find('.list-group-item').draggable({
-      revert: true,
-      revertDuration: 200
+      revert: "invalid",
+      revertDuration: 200,
+      opacity: 0.35
     });
   },
 
