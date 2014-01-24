@@ -11,7 +11,7 @@ class Memo < ActiveRecord::Base
              :foreign_key => :notebook_id,
              :primary_key => :id
 
-  has_one :author, :through => :notebooks, :source => :user
+  has_one :author, :through => :notebook, :source => :user
 
   has_many :taggings
   has_many :tags, :through => :taggings, :source => :tag

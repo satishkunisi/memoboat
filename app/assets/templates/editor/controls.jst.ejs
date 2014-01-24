@@ -1,4 +1,22 @@
 <div id="editor-controls">
+  
+  <label for="memo_notebook_id">Notebook</label>
+
+  <select id="memo-notebook-id" name="memo[notebook_id]" class="form-control">
+    <% notebooks.forEach(function (notebook) { %>
+      <option value="<%= notebook.id %>" 
+              
+              <% if (memoNotebookId == notebook.id) { %>
+                selected="selected"
+              <% } %> 
+              >
+              <%= notebook.get('title') %>
+      </option>
+    <% }) %>
+  </select>
+  <br/>
+
+
   <button id="memo-new" 
           type="button"
           <% if (isNewMemo) { %> disabled <% } %>

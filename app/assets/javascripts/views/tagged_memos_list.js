@@ -1,8 +1,7 @@
-Memoboat.Views.MemoSidebar = Backbone.View.extend({
+Memoboat.Views.TaggedMemosList = Backbone.View.extend({
 
-  initialize: function (options) {
+  initialize: function () {
     var that = this;
-    this.notebookTitle = options.notebookTitle;
 
     this.listenTo(this.collection, "add change remove reset", this.render);
    
@@ -12,14 +11,14 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
   },
 
   events: {
-    "click .list-group-item": "showMemo"
+    "click .memo-item": "showMemo"
   },
 
-  template: JST['memo_sidebar'],
+  template: JST['tagged_memos'],
 
   className: "col-xs-3",
 
-  id: "memo-sidebar",
+  id: "tagged-memos-list",
 
   removeMemo: function (options) {
     var memo = this.collection.get(options.memoId);
@@ -32,33 +31,20 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
     var memoId = $(event.currentTarget).data('id');
     var notebookId = this.collection.notebookId;
     this._swapActiveMemo($(event.currentTarget));
-    Memoboat.Routers.router.switchMemo(notebookId, memoId);
-
-    //Backbone.history.navigate("notebooks/" + notebookId + "/memos/" + memoId, { trigger: true});
-    
+    Memoboat.Routers.router.switchTaggedMemoEditor(this.collection, memoId);
   },
 
   render: function () {
-    console.log("rendering")
     var renderedContent = this.template({
       memos: this.collection,
-      notebookTitle: this.notebookTitle
+      tagTitle: this.model.get('name')
     });
 
     this.$el.html(renderedContent);
 
-    this.makeMemosDraggable();
-
     return this;
   },
 
-  makeMemosDraggable: function () {
-    this.$el.find('.list-group-item').draggable({
-      revert: "invalid",
-      revertDuration: 200,
-      opacity: 0.35
-    });
-  },
 
   _swapActiveMemo: function ($memo) {
     this._activeMemo && this._activeMemo.removeClass('active');

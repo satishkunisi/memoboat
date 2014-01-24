@@ -20,6 +20,8 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
 
     var taggingId = this.model.get('tags').get(tagId).get('tagging').id
     
+    console.log(taggingId);
+
     var tagging = new Memoboat.Models.Tagging({
       id: taggingId
     })
@@ -34,8 +36,6 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
   },
 
   render: function () {
-
-    console.log(this.model.get('tags'))
 
     var renderedContent = this.template({
       tags: this.model.get('tags')

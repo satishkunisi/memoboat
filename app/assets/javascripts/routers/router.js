@@ -8,7 +8,9 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "mainView",
     "notebooks/:id": "switchNotebook",
-    "notebooks/:notebookId/memos/:id": "switchMemo"
+    "notebooks/:notebookId/memos/:id": "switchMemo",
+    "tags/:id": "tagView",
+    "tags/:tag_id/memo/:id" : "switchTaggedMemoEditor"
   },
 
   mainView: function () {
@@ -18,6 +20,57 @@ Memoboat.Routers.Router = Backbone.Router.extend({
       var firstNbId = Memoboat.notebooks.first().id;
       that.switchNotebook(firstNbId);
     });
+  },
+
+  tagView: function (id) {
+
+    var that = this;
+
+    function createTagView () {
+      tag = new Memoboat.Models.Tag({
+        id: id
+      })
+
+      tag.fetch({
+        success: function () {
+          var memos = tag.get('memos');
+          var tagMemosView = new Memoboat.Views.TaggedMemosList({
+            model: tag,
+            collection: memos
+          });
+
+          that._swapMemoList(tagMemosView);
+          that.switchTaggedMemoEditor(memos, memos.first().id);
+        }
+      })
+    }
+    
+
+    if ($('#notebook-sidebar').length === 0) {
+      this.installNotebooksSidebar(createTagView, id);
+    } else {
+      createTagView();
+    }
+  },
+
+  switchTaggedMemoEditor: function (memos, memoId) {
+    var that = this;
+
+    var memo = new Memoboat.Models.Memo({
+      id: memoId
+    })
+
+    memo.fetch({
+      success: function () {
+        var editor = new Memoboat.Views.Editor({
+          model: memo,
+          collection: memos
+        });
+
+      that._swapEditor(editor);
+      }
+    });
+    
   },
 
   installNotebooksSidebar: function (callback, activeNotebook) {
@@ -116,11 +169,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
    _swapEditor: function (view) {
     this._currentEditor && this._currentEditor.remove();
     this._currentEditor = view;
-    $('#memo-sidebar').after(view.render().$el);
+    this.$rootEl.append(view.render().$el);
 
-    // $('.typeahead').typeahead({
-    //   name: "hi",
-    //   local: ["yo", "yourself", "meow"]
-    // });
   }
 })

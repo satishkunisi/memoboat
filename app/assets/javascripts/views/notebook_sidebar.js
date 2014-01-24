@@ -1,5 +1,10 @@
 Memoboat.Views.NotebookSidebar = Backbone.View.extend({
 
+  initialize: function () {
+    this.listenTo(this.collection, "add change remove reset", this.render);
+    this._childViews = [];
+  },
+
   template: JST["notebook-sidebar"],
 
   className: "col-xs-2",
@@ -21,22 +26,24 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
 
   installAddNotebookForm: function () {
     var newNotebook = new Memoboat.Models.Notebook();
-    var view = new Memoboat.Views.AddNotebook({
+    var addNotebookView = new Memoboat.Views.AddNotebook({
       model: newNotebook,
       collection: this.collection
     });
 
-    this.$el.append(view.render().$el);
+    this._childViews.push(addNotebookView);
+
+    this.$el.append(addNotebookView.render().$el);
   },
 
 
   installNotebookList: function () {
-    var that = this;
-
     var notebooksList = new Memoboat.Views.NotebookList({
       collection: Memoboat.notebooks,
       startNotebook: this.startNotebook
     });
+
+    this._childViews.push(notebooksList);
 
     this.$el.append(notebooksList.render().$el);
   },
@@ -50,9 +57,26 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
           collection: Memoboat.userTags
         });
 
+        that._childViews.push(tagList);
+
         that.$el.find('#notebook-list').after(tagList.render().$el);
       }
     });
+  },
+
+  removeChildViews: function () {
+
+    if (this._childViews.length === 0) {
+      return;
+    }
+
+    var childView = this._childViews.pop();
+
+     if (childView.removeChildViews) {
+        childView.removeChildViews();
+     } else {
+       childView.remove();
+     }
   }
 
 })

@@ -1,7 +1,6 @@
 Memoboat.Views.NotebookList = Backbone.View.extend({
 
   initialize: function (options) {
-    this.listenTo(this.collection, "add change remove reset sync", this.render);
 
     if (!options.activeNotebook) {
       this.startNotebook = this.collection.first().id
@@ -13,7 +12,7 @@ Memoboat.Views.NotebookList = Backbone.View.extend({
 
   events: {
     "click span.close": "deleteNotebook",
-    "click .list-group-item": "showMemos"
+    "click .notebook-item": "showMemos"
   },
 
   template: JST["notebook-list"],

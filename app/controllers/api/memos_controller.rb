@@ -17,7 +17,7 @@ class Api::MemosController < ApplicationController
   end
 
   def show
-    @memo = current_user.memos.find(params[:id])
+    @memo = Memo.includes(:taggings => :tag).where(:id => params[:id]).first
   end
 
   def update

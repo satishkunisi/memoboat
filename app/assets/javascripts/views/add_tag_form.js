@@ -5,7 +5,7 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
   
   id: "create-tag-form",
   
-  className: "form-inline",
+  className: "form-inline col-xs-4",
   
   events: {
     "click button#create-new-tag": "createTag"
