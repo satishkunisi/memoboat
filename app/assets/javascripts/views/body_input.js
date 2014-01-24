@@ -12,16 +12,17 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   saveNote: function (event) {
     event.preventDefault();
 
-    var that = this;
-    var bodyData = $(event.target).serializeJSON();
-    // var notebookId = $("#memo_notebook_id").val();
-    // bodyData["memo"]["notebook_id"] = notebookId;
+    var bodyData = {memo: {}};
+
+    bodyData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
+    bodyData["memo"]["title"] = $('#memo_title').val();
+    bodyData["memo"]["body"] = $('#memo_body').val();
 
     if (this.model.isNew()) {
-      this.model.set(bodyData["memo"])
+      this.model.set(bodyData)
       this.collection.create(this.model);
     } else {
-      this.model.save(bodyData["memo"]);
+      this.model.save(bodyData);
     }
   },
 

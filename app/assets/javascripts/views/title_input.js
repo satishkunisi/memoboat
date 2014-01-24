@@ -7,12 +7,17 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
     "change input": "saveNote"
   },
 
+  template: JST['editor/title_input'],
+
+
   saveNote: function (event) {
     event.preventDefault();
 
-    var titleData = $(event.target).serializeJSON();
-    var notebookId = $("#memo-notebook-id").val();
-    titleData["memo"]["notebook_id"] = notebookId;
+    var titleData = {memo: {}};
+
+    titleData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
+    titleData["memo"]["title"] = $('#memo_title').val();
+    titleData["memo"]["body"] = $('#memo_body').val();
 
     if (this.model.isNew()) {
       this.model.set(titleData["memo"])
@@ -21,8 +26,6 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
       this.model.save(titleData["memo"]);
     }
   },
-
-  template: JST['editor/title_input'],
 
   render: function () {
     var renderedContent = this.template({

@@ -29,6 +29,7 @@ Memoboat.Views.AddNotebook = Backbone.View.extend({
     var formData = $(event.target.form).serializeJSON();
     this.model.set(formData["notebook"]);
     
+    $('#memo-notebook-id').trigger('chosen:updated');
     this.collection.create(this.model, {wait: true});
   }
 

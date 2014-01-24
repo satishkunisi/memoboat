@@ -17,7 +17,7 @@ class Memo < ActiveRecord::Base
   has_many :tags, :through => :taggings, :source => :tag
 
   def generate_default_title
-    return nil if self.title
+    return nil unless self.title.length == 0 
     random_title = "Untitled Note #{Time.now.to_i}"
 
     if Memo.find_by_title(random_title)

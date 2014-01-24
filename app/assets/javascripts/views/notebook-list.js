@@ -47,6 +47,8 @@ Memoboat.Views.NotebookList = Backbone.View.extend({
 
   deleteNotebook: function (event) {
     event.preventDefault();
+    event.stopImmediatePropagation();
+
     var that = this;
 
     var notebookId = $(event.target).data('id');
