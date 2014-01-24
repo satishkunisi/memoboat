@@ -4,7 +4,8 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
   },
   
   events: {
-    "click .delete-tag": "deleteTagging"
+    "click .delete-tag": "deleteTagging",
+    "click .memo-tag-btn": "showTags"
   },
 
   id: "memo-tag-list",
@@ -33,11 +34,17 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
     
   },
 
+  showTags: function (event) {
+    var tagId = $(event.target).data('id');
+
+    Backbone.history.navigate('tags/' + tagId, {trigger: true});
+  },
+
   makeMemoListDroppable: function () {
     var that = this;
 
     this.$el.droppable({
-      accept: ".user-tag-item",
+      accept: ".tag-list-item",
       hoverClass: "active",
       drop: function (event, ui) {
         var tagId = ui.draggable.data('id');

@@ -28,7 +28,7 @@ Memoboat.Views.TagList = Backbone.View.extend({
   },
 
   makeTagsDraggable: function () {
-    this.$el.find('.listgroup-item-heading').draggable({
+    this.$el.find('.tag-list-item').draggable({
       revert: "invalid",
       revertDuration: 200,
       helper: 'clone',
