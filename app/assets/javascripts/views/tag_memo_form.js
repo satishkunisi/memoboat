@@ -43,7 +43,7 @@ Memoboat.Views.TagMemoForm = Backbone.View.extend({
   
     this.$el.html(renderedContent);
 
-    this.$el.find("#tag-name").chosen({
+    this.$el.find("#tag-name-select").chosen({
       disable_search_threshold: 10,
       placeholder_text_multiple: "Tag this memo.",
       no_results_text: "Oops, nothing found!",

@@ -1,40 +1,44 @@
+  <div id="memo-button-controls" class="pull-left">
+    <button id="memo-new" 
+            type="button"
+            <% if (isNewMemo) { %> disabled <% } %>
+            class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-file"></span>
+            New
+    </button>
 
-  <button id="memo-new" 
-          type="button"
-          <% if (isNewMemo) { %> disabled <% } %>
-          class="btn btn-primary btn-sm">
-          <span class="glyphicon glyphicon-file"></span>
-          New
-  </button>
+    <button id="memo-trash" 
+            type="button"
+            <% if (isNewMemo) { %> disabled <% } %>
+            class="btn btn-danger btn-sm">
+            <span class="glyphicon glyphicon-trash"></span>
+            Trash
+    </button>
+    <button id="memo-save" type="button"
+            class="btn btn-warning btn-sm">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            Save
+    </button>
+  </div>
 
-  <button id="memo-trash" 
-          type="button"
-          <% if (isNewMemo) { %> disabled <% } %>
-          class="btn btn-danger btn-sm">
-          <span class="glyphicon glyphicon-trash"></span>
-          Trash
-  </button>
-  <button id="memo-save" type="button"
-          class="btn btn-warning btn-sm">
-          <span class="glyphicon glyphicon-floppy-disk"></span>
-          Save
-  </button>
+  <div id="change-memo-notebook" class="pull-left">
+    <label for="memo_notebook_id">Notebook</label>
 
-  <label for="memo_notebook_id">Notebook</label>
-
-  <select id="memo-notebook-id" name="memo[notebook_id]" class="form-control">
-    <% notebooks.forEach(function (notebook) { %>
-      <option value="<%= notebook.id %>" 
-              
-              <% if (memoNotebookId == notebook.id) { %>
-                selected="selected"
-              <% } %> 
-              >
-              <%= notebook.get('title') %>
-      </option>
-    <% }) %>
-  </select>
+    <select id="memo-notebook-id" name="memo[notebook_id]" class="form-control">
+      <% notebooks.forEach(function (notebook) { %>
+        <option value="<%= notebook.id %>" 
+                
+                <% if (memoNotebookId == notebook.id) { %>
+                  selected="selected"
+                <% } %> 
+                >
+                <%= notebook.get('title') %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
   
+<br />
 <br />
 <br />
 

@@ -24,6 +24,10 @@ Memoboat.Views.Editor = Backbone.View.extend({
       collection: this.collection
     })
 
+    var timeData = new Memoboat.Views.TimeData({
+      model: this.model
+    });
+
     var titleInput = new Memoboat.Views.TitleInput({
       model: this.model,
       collection: this.collection
@@ -43,12 +47,13 @@ Memoboat.Views.Editor = Backbone.View.extend({
     this.$el.html(mainContent)
 
     this.$el.append(tag_controls.render().$el)
+            .append(timeData.render().$el)
             .append(titleInput.render().$el)
             .append(bodyInput.render().$el)
             .prepend(controls.render().$el);
 
     if (!this.model.isNew()) {
-       this.$el.find('#memo_title').before(memoTagList.render().$el);
+       this.$el.find('#time-data').before(memoTagList.render().$el);
     }
 
     return this;

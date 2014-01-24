@@ -1,10 +1,12 @@
 
-<h4>Memo Tags</h4>
 <ul class="list-inline">
+    <li> 
+      <span class="glyphicon glyphicon-tags"></span>
+    </li>
   <% tags.forEach(function (tag) { %>
     <li class="btn-group">
       <button type="button" 
-              class="btn btn-default btn-xs" 
+              class="delete-tag btn btn-default btn-xs" 
               data-id="<%= tag.id %>">
               &times;
       </button>
@@ -15,3 +17,4 @@
     </li>
   <% }) %>
 </ul>
+<br>

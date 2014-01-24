@@ -35,10 +35,30 @@ body {
 
 
 input#new_tag_name {
-  width: 50%
+  width: 50%;
+  float: left;
+  margin-right: 10px;
+  height: 38px;
 }
+
+
 
 .brand {
   margin: 10px 30px;
 }
+
+#change-memo-notebook {
+  margin-left: 150px;
+  width: 300px;
+}
+
+#tag-controls ul li {
+  width: 250px;
+}
+
+
+#tag-controls ul li form{
+  width: 200px;
+}
+
 

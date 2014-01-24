@@ -4,7 +4,7 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
   },
   
   events: {
-    "click li.btn-group button": "deleteTagging"
+    "click .delete-tag": "deleteTagging"
   },
 
   id: "memo-tag-list",

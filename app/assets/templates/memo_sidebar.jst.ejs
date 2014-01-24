@@ -1,5 +1,8 @@
 
-<h3><span class="glyphicon glyphicon-folder-open"></span>   <%= notebookTitle %></h3>
+<h3>
+   <span class="glyphicon glyphicon-folder-open"></span>
+   <%= notebookTitle %>
+</h3>
 <div class="list-group">
   <% memos.forEach(function (memo) { %>
     <a href="#" class="list-group-item memo-item" 
@@ -13,6 +16,7 @@
         <span class="glyphicon glyphicon-time"></span>
         <%= moment(memo.get('updated_at')).fromNow() %>
       </p>
+      <br/>
       <p class="list-group-item-text text-muted"><%= memo.preview() %></p>
     </a>
   <% }) %>

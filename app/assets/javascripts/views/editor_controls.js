@@ -77,7 +77,7 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
     this.$el.find('#memo-notebook-id').chosen({
       disable_search_threshold: 10,
       no_results_text: "Oops, nothing found!",
-      width: "30%"
+      width: "50%"
     });
 
     return this;

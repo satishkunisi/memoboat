@@ -7,13 +7,14 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
     "click button#create-new-tag": "createTag"
   },
 
-  className: "input-group",
-
   tagName: "li",
 
   createTag: function (event) {
     
     event.preventDefault();
+
+    console.log("in here");
+
     var that = this;
 
     var formData = $(event.target.form).serializeJSON();
