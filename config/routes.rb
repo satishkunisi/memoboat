@@ -4,6 +4,8 @@ Memoboat::Application.routes.draw do
 
   root to: "static_pages#root"
 
+  get '/demo', to: "static_pages#demo"
+
   namespace :api, :defaults => {:format => :json} do
     # <form>
     # <input type="hidden" name="memo[note_id]" value="<%= note.get("id" %>">

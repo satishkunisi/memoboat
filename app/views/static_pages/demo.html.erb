@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="jumbotron ">
+    <h1>Welcome to MemoBoat</h1>
+    <p>MemoBoat is a cloud note-taking app</p>
+    <form action="<%= session_url %>" method="POST">
+      <input type="hidden"
+             name="user[email]"
+             value="demo@memoboat.com">
+      <input type="hidden"
+             name="user[password]"
+             value="demoboat">
+
+      <button type="submit" class="btn btn-primary btn-lg" role="button">Demo</button>
+    </form>
+  </div>
+</div>

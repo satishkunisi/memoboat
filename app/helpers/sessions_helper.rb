@@ -23,7 +23,7 @@ module SessionsHelper
   end
 
   def require_logged_in
-    redirect_to new_session_url if logged_out?
+    redirect_to demo_url if logged_out?
   end
 
   def require_logged_out
@@ -34,7 +34,7 @@ module SessionsHelper
     if logged_in?
       redirect_to user_url(current_user) 
     else
-      redirect_to new_session_url
+      redirect_to demo_url
     end
   end
 
