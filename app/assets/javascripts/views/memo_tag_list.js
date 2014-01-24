@@ -20,8 +20,6 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
 
     var taggingId = this.model.get('tags').get(tagId).get('tagging').id
     
-    console.log(taggingId);
-
     var tagging = new Memoboat.Models.Tagging({
       id: taggingId
     })
@@ -35,6 +33,31 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
     
   },
 
+  makeMemoListDroppable: function () {
+    var that = this;
+
+    this.$el.droppable({
+      accept: ".user-tag-item",
+      hoverClass: "active",
+      drop: function (event, ui) {
+        var tagId = ui.draggable.data('id');
+        var tag = Memoboat.userTags.get(tagId)
+
+        var tagging = new Memoboat.Models.Tagging({
+          memo_id: that.model.id,
+          tag_id: tagId
+        });
+
+        tagging.save({}, {
+          success: function () {
+            that.model.get('tags').add(tag);
+            that.model.fetch();
+          }
+        });
+      }
+    });
+  },
+
   render: function () {
 
     var renderedContent = this.template({
@@ -43,6 +66,7 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
 
     this.$el.html(renderedContent);
 
+    this.makeMemoListDroppable();
     return this;
   }
 

@@ -33,6 +33,11 @@ body {
   float: right;
 }
 
+.listgroup-item-heading {
+  z-index: 500
+}
+
+
 
 input#new_tag_name {
   width: 50%;

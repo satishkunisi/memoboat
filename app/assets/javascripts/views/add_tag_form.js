@@ -13,8 +13,6 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
     
     event.preventDefault();
 
-    console.log("in here");
-
     var that = this;
 
     var formData = $(event.target.form).serializeJSON();

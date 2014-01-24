@@ -23,7 +23,16 @@ Memoboat.Views.TagList = Backbone.View.extend({
     });
 
     this.$el.html(renderedContent);
-
+    this.makeTagsDraggable();
     return this;
+  },
+
+  makeTagsDraggable: function () {
+    this.$el.find('.listgroup-item-heading').draggable({
+      revert: "invalid",
+      revertDuration: 200,
+      helper: 'clone',
+      opacity: 0.35
+    });
   }
 })
