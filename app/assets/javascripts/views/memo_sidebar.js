@@ -33,13 +33,11 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
     var notebookId = this.collection.notebookId;
     this._swapActiveMemo($(event.currentTarget));
     Memoboat.Routers.router.switchMemo(notebookId, memoId);
-
-    //Backbone.history.navigate("notebooks/" + notebookId + "/memos/" + memoId, { trigger: true});
+    Backbone.history.navigate("notebooks/" + notebookId + "/memos/" + memoId);
     
   },
 
   render: function () {
-    console.log("rendering")
     var renderedContent = this.template({
       memos: this.collection,
       notebookTitle: this.notebookTitle

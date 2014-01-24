@@ -10,9 +10,9 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
     "change #memo-notebook-id": "changeNotebook"
   },
 
-  template: JST['editor/controls'],
+  id: "editor-controls",
 
-  className: "col-xs-6",
+  template: JST['editor/controls'],
 
   newMemo: function (event) {
     event.preventDefault();
@@ -49,6 +49,7 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
           return;
         }
 
+        that.$el.find('#memo-notebook-id').trigger('chosen:updated');
         that.collection.remove(that.model)
       }
     });
@@ -73,6 +74,12 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
     });
 
     this.$el.html(renderedContent)
+    this.$el.find('#memo-notebook-id').chosen({
+      disable_search_threshold: 10,
+      no_results_text: "Oops, nothing found!",
+      width: "30%"
+    });
+
     return this;
   }
 })

@@ -3,7 +3,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
     this.listenTo(this.model, "sync", this.render)
   },
 
-  className: "col-xs-6",
+  className: "col-xs-6 well well-lg",
 
   id: "editor",
 
@@ -15,7 +15,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
       memo: this.model
     });
 
-    var memoTagForm = new Memoboat.Views.MemoTagForm({
+    var tag_controls = new Memoboat.Views.TagControls({
       model: this.model
     });
 
@@ -34,15 +34,22 @@ Memoboat.Views.Editor = Backbone.View.extend({
       collection: this.collection
     });
 
-    var editorForm = $("<form>").addClass("form-horizontal");
-    $(editorForm).append(memoTagForm.render().$el)
-                 .append(titleInput.render().$el)
-                 .append(bodyInput.render().$el)
-                 .prepend(controls.render().$el);
+    if (!this.model.isNew()) {
+      var memoTagList = new Memoboat.Views.MemoTagList({
+        model: this.model
+      });
+    }
                  
-    var renderedContent = $(mainContent).append(editorForm)
- 
-    this.$el.html(renderedContent);
+    this.$el.html(mainContent)
+
+    this.$el.append(tag_controls.render().$el)
+            .append(titleInput.render().$el)
+            .append(bodyInput.render().$el)
+            .prepend(controls.render().$el);
+
+    if (!this.model.isNew()) {
+       this.$el.find('#memo_title').before(memoTagList.render().$el);
+    }
 
     return this;
   }

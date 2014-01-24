@@ -1,10 +1,18 @@
-<h3><%= notebookTitle %></h3>
+
+<h3><span class="glyphicon glyphicon-folder-open"></span>   <%= notebookTitle %></h3>
 <div class="list-group">
   <% memos.forEach(function (memo) { %>
     <a href="#" class="list-group-item memo-item" 
                 data-id="<%= memo.id %>" 
                 data-nb-id="<%= memos.notebookId %>">
-      <h4 class="list-group-item-heading"><%= memo.get('title') %></h4>
+
+      <h4 class="list-group-item-heading">
+        <%= memo.get('title') %>
+      </h4>
+      <p class="list-group-item-text text-success">
+        <span class="glyphicon glyphicon-time"></span>
+        <%= moment(memo.get('updated_at')).fromNow() %>
+      </p>
       <p class="list-group-item-text text-muted"><%= memo.preview() %></p>
     </a>
   <% }) %>

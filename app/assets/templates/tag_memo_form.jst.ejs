@@ -1,0 +1,13 @@
+
+<select multiple id="tag-name" name="tag[name]" class="form-control" type="text">
+  <option>
+    Select a tag
+  </option>
+  <% tags.forEach(function (tag) { %>
+    <option data-id="<%= tag.id %>" value="<%= tag.get('name') %>">
+      <span class="glyphicon glyphicon-tag"></span><%= tag.get('name') %>
+    </option>
+  <% }) %>
+</select>
+
+

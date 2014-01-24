@@ -14,10 +14,12 @@
 //= require jquery_ujs
 //= require jquery_serializeJSON
 //= require jquery-ui
+//= require chosen.jquery
 //= require underscore.min
 //= require backbone
 //= require typeahead
 //= require bootstrap
+//= require moment.min
 //= require memoboat
 //= require_tree ../templates
 //= require_tree ./models
