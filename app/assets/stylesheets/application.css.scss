@@ -66,4 +66,15 @@ input#new_tag_name {
   width: 200px;
 }
 
+.memo-item p.text-muted {
+  border-top: 1px dotted #ccc;
+  padding-top: 10px;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+#memo-sidebar .list-group{
+  max-height: 550px;
+  overflow: scroll
+}
 

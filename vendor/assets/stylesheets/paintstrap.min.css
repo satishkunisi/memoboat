@@ -470,7 +470,7 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 a.badge:hover,a.badge:focus{color:#ffffff;text-decoration:none;cursor:pointer;}
 a.list-group-item.active>.badge,.nav-pills>.active>a>.badge{color:#2c343b;background-color:#ffffff;}
 .nav-pills>li>a>.badge{margin-left:3px;}
-.jumbotron{padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#52616d;}.jumbotron h1,.jumbotron .h1{line-height:1;color:inherit;}
+.jumbotron{padding:30px;margin-bottom:30px;font-size:21px;font-weight:200;line-height:2.1428571435;color:inherit;background-color:#92AABD;}.jumbotron h1,.jumbotron .h1{line-height:1;color:inherit;}
 .jumbotron p{line-height:1.4;}
 .container .jumbotron{border-radius:6px;}
 .jumbotron .container{max-width:100%;}

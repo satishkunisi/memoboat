@@ -1,7 +1,7 @@
 <div class="container">
   <div class="jumbotron ">
     <h1>Welcome to MemoBoat</h1>
-    <p>MemoBoat is a cloud note-taking app</p>
+    <p>MemoBoat is a cloud note-taking app.</p>
     <form action="<%= session_url %>" method="POST">
       <input type="hidden"
              name="user[email]"
@@ -10,7 +10,9 @@
              name="user[password]"
              value="demoboat">
 
-      <button type="submit" class="btn btn-primary btn-lg" role="button">Demo</button>
+      <button type="submit" class="col-xs-offset-4 btn btn-primary btn-lg" role="button">Demo</button>
     </form>
+    <br>
+    <%= link_to "Or sign up here.", new_user_url %>
   </div>
 </div>

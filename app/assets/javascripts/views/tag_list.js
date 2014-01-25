@@ -13,6 +13,7 @@ Memoboat.Views.TagList = Backbone.View.extend({
 
   showTaggedMemos: function (event) {
     event.preventDefault();
+    console.log("in here ")
     var tagId = $(event.currentTarget).data('id');
     Memoboat.Routers.router.tagView(tagId);
   },

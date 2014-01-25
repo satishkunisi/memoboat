@@ -1,32 +1,63 @@
 <% action = (@user.persisted?) ? user_url(@user) : users_url %>
-<% button = (@user.persisted?) ? "Update Profile" :  "Sign Up" %>
+<% button = (@user.persisted?) ? "Update Profile" :  "Sign Up" %> 
 
+<div class="panel panel-primary col-xs-6 col-xs-offset-4">
 
-<form action="<%= action %>" method="POST">
+  <div class= "panel-header">
+    <h1> <%= button %> </h1>
+  </div>
 
-  <% if @user.persisted? %>
-    <input type="hidden" name="_method" value="PUT">
-  <% end %>
+  <div class= "panel-body">
+    <form class="form-horizontal" action="<%= action %>" method="POST">
 
-  <input type="hidden"
-         name="authenticity_token"
-         value="<%= form_authenticity_token %>">
+      <% if @user.persisted? %>
+        <input type="hidden" name="_method" value="PUT">
+      <% end %>
 
-  <label for="user_email">Email Address</label>
-  <input type="email" 
-         name="user[email]" 
-         id="user_email" 
-         value="<%= @user.email %>">
+      <input type="hidden"
+             name="authenticity_token"
+             value="<%= form_authenticity_token %>">
+      
+      <div class="form-group">
+        <label for="user_email" 
+               class="col-xs-2 control-label">
+               Email
+        </label>
 
-  <label for="user_password">Password</label>
-  <input type="password"
-         name="user[password]"
-         id="user_password">
+        <div class="col-xs-6">
+          <input type="email"
+                 class="form-control" 
+                 name="user[email]" 
+                 id="user_email"
+                 value="<%= @user.email %>">
+        </div>
+      </div>
 
-  <input type="submit"
-         value="<%= button %>">
+      <div class="form-group">
+        <label for="user_password"
+               class="col-xs-2 control-label">
+               Password
+        </label>
 
-</form>
+        <div class="col-xs-6">
+          <input type="password"
+                 class="form-control"  
+                 name="user[password]"
+                 id="user_password">
+        </div>
+      </div>
+
+      <div class="col-xs-offset-2">
+        <input type="submit"
+               class="btn btn-primary"
+               value="<%= button %>">
+      </div>
+    
+    </form>
+  
+  </div>  
+
+</div>
 
 
 

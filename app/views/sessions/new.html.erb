@@ -1,22 +1,54 @@
-<h1> Sign In </h1>
 
-<form action="<%= session_url %>" method="POST">
 
-  <input type="hidden"
-         name="authenticity_token"
-         value="<%= form_authenticity_token %>">
+<div class="panel panel-primary col-xs-6 col-xs-offset-4">
 
-  <label for="user_email">Email Address</label>
-  <input type="email" 
-         name="user[email]" 
-         id="user_email">
+  <div class= "panel-header">
+    <h1> Sign In </h1>
+  </div>
 
-  <label for="user_password">Password</label>
-  <input type="password"
-         name="user[password]"
-         id="user_password">
+  <div class= "panel-body">
+    <form class="form-horizontal" action="<%= session_url %>" method="POST">
 
-  <input type="submit"
-         value="Sign In">
+      <input type="hidden"
+             name="authenticity_token"
+             value="<%= form_authenticity_token %>">
+      
+      <div class="form-group">
+        <label for="user_email" 
+               class="col-xs-2 control-label">
+               Email
+        </label>
 
-</form>
+        <div class="col-xs-6">
+          <input type="email"
+                 class="form-control" 
+                 name="user[email]" 
+                 id="user_email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="user_password"
+               class="col-xs-2 control-label">
+               Password
+        </label>
+
+        <div class="col-xs-6">
+          <input type="password"
+                 class="form-control"  
+                 name="user[password]"
+                 id="user_password">
+        </div>
+      </div>
+
+      <div class="col-xs-offset-2">
+        <input type="submit"
+               class="btn btn-primary"
+               value="Sign In">
+      </div>
+    
+    </form>
+  
+  </div>  
+
+</div>
