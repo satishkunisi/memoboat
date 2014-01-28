@@ -18,7 +18,7 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
       this.saveNote();
     }
 
-  }, 1000),
+  }, 2000),
 
   saveNote: function (event) {
     if (event) { 
