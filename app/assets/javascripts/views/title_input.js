@@ -1,6 +1,6 @@
 Memoboat.Views.TitleInput = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "change remove sync", this.render)
+    //this.listenTo(this.model, "change:title remove sync", this.render)
   },
 
   events: {
@@ -32,23 +32,13 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
     titleData["memo"]["title"] = $('#memo_title').val();
     titleData["memo"]["body"] = $('#memo_body').val();
 
-    console.log(titleData);
 
     if (this.model.isNew()) {
       this.model.set(titleData["memo"])
-      this.collection.create(this.model, {
-        success: function () {
-          that.collection.sort();
-        }
-      })
+      this.collection.create(this.model)
     } else {
       this.model.set(titleData["memo"])
-      console.log(this.model)
-      this.model.save({}, {
-        success: function () {
-          that.collection.sort();
-        }
-      });
+      this.model.save({});
     }
   },
 

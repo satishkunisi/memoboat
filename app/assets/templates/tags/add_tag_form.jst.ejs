@@ -1,4 +1,18 @@
 <form>
-  <input type="text" class="form-control" id="new_tag_name" name="new_tag[name]">
-  <button type="submit" id="create-new-tag" class="btn btn-primary">New Tag</button>
+  <input type="text" 
+         class="form-control" 
+         id="new_tag_name" 
+         name="new_tag[name]"
+         <% if (disabled) { %>
+           disabled
+         <% } %>
+         >
+  <button type="submit"
+      id="create-new-tag" 
+      class="btn btn-primary"
+      <% if (disabled) { %>
+        disabled
+      <% } %>>
+      New Tag
+  </button>
 </form>

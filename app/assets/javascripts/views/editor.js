@@ -1,6 +1,6 @@
 Memoboat.Views.Editor = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "sync", this.render);
+    var that = this;
   },
 
   className: "col-xs-6 well well-lg",
@@ -8,6 +8,13 @@ Memoboat.Views.Editor = Backbone.View.extend({
   id: "editor",
 
   template: JST['editor/main'],
+
+  setFocus: function () {
+    $(this.focusEl).focus();
+    var inputData = $(this.focusEl).val();
+    $(this.focusEl).val('');
+    $(this.focusEl).val(inputData);
+  },
 
   render: function () {
 
@@ -38,11 +45,9 @@ Memoboat.Views.Editor = Backbone.View.extend({
       collection: this.collection
     });
 
-    if (!this.model.isNew()) {
-      var memoTagList = new Memoboat.Views.MemoTagList({
-        model: this.model
-      });
-    }
+    var memoTagList = new Memoboat.Views.MemoTagList({
+      model: this.model
+    });
                  
     this.$el.html(mainContent)
 
@@ -65,7 +70,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
     var that = this;
 
     this.$el.droppable({
-      accept: ".tag-list-item",
+      accept: ".tagId-list-item",
       hoverClass: "active",
       drop: function (event, ui) {
         var tagId = ui.draggable.data('id');

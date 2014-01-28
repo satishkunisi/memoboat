@@ -15,10 +15,11 @@ Memoboat.Views.TimeData = Backbone.View.extend({
   render: function () {
     var renderedContent = this.template({
       memoCreated: moment(this.model.get('created_at')).format('MMMM Do YYYY, h:mm a'),
-      memoUpdated: moment(this.model.get('updated_at')).fromNow()
+      memoUpdated: moment(this.model.get('updated_at')).subtract('s', 20).fromNow()
     });
 
     this.$el.html(renderedContent);
+
 
     return this;
   }

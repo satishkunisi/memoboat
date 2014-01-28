@@ -1,6 +1,6 @@
 Memoboat.Views.BodyInput = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "change remove sync", this.render)
+    //this.listenTo(this.model, "change remove sync", this.render)
   },
 
   template: JST['editor/body_input'],

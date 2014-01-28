@@ -1,6 +1,6 @@
 Memoboat.Views.MemoTagList = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model.get('tags'), "add remove change reset sync", this.render)
+    this.listenTo(this.model, "change sync", this.render)
   },
   
   events: {
@@ -40,9 +40,15 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
     Backbone.history.navigate('tags/' + tagId, {trigger: true});
   },
 
-  
+  installTagsListener: function () {
+    if (!this.model.isNew()) {
+      this.listenTo(this.model.get('tags'), "add remove change reset sync", this.render);    
+    }
+  },
 
   render: function () {
+
+    this.installTagsListener();
 
     var renderedContent = this.template({
       tags: this.model.get('tags')

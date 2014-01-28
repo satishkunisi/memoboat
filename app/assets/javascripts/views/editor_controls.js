@@ -2,12 +2,6 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, "destroy change", this.render)
     this.listenTo(Memoboat.notebooks, "add change remove reset sync", this.render)
-
-    var that = this; 
-
-    // Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
-    //   that.model.fetch();
-    // })
   },
 
   events: {

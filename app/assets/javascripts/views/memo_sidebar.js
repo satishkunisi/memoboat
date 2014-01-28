@@ -4,11 +4,15 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
     var that = this;
     this.notebookTitle = options.notebookTitle;
 
-    this.listenTo(this.collection, "add change remove reset sort", this.render);
+    this.listenTo(this.collection, "add change remove reset sort sync", this.render);
    
     Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
       that.removeMemo(memoId);
     })
+
+    this.timer = setInterval(function () {
+       that.collection.fetch();
+    }, 10000);
   },
 
   events: {

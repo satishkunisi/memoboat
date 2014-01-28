@@ -1,4 +1,8 @@
 Memoboat.Views.AddTagForm = Backbone.View.extend({
+  initialize: function () {
+    this.listenTo(this.model, "sync", this.render)
+  },
+
   template: JST["tags/add_tag_form"],
   
   id: "create-tag-form",
@@ -46,9 +50,13 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
 
   },
 
+
   render: function () {
+    var disabled = this.model.isNew();
+    
     var renderedContent = this.template({
-      model: this.model
+      model: this.model,
+      disabled: disabled
     });
 
     this.$el.html(renderedContent);
