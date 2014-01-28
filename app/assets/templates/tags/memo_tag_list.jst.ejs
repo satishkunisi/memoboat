@@ -3,18 +3,22 @@
     <li> 
       <span class="glyphicon glyphicon-tags"></span>
     </li>
-  <% tags.forEach(function (tag) { %>
-    <li class="btn-group">
-      <button type="button" 
-              class="delete-tag btn btn-default btn-xs" 
-              data-id="<%= tag.id %>">
-              &times;
-      </button>
-      <button class="btn btn-default btn-xs memo-tag-btn" 
-              data-id="<%= tag.id %>">
-              <%= tag.get('name') %> 
-      </button>
-    </li>
-  <% }) %>
+
+  <% if (tags) { %>
+    <% tags.forEach(function (tag) { %>
+      <li class="btn-group">
+        <button type="button" 
+                class="delete-tag btn btn-default btn-xs" 
+                data-id="<%= tag.id %>">
+                &times;
+        </button>
+        <button class="btn btn-default btn-xs memo-tag-btn" 
+                data-id="<%= tag.id %>">
+                <%= tag.get('name') %> 
+        </button>
+      </li>
+    <% }) %>
+  <% } %>
+
 </ul>
 <br>

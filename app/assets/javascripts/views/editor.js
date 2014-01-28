@@ -52,14 +52,11 @@ Memoboat.Views.Editor = Backbone.View.extend({
     this.$el.html(mainContent)
 
     this.$el.append(tag_controls.render().$el)
+            .append(memoTagList.render().$el)
             .append(timeData.render().$el)
             .append(titleInput.render().$el)
             .append(bodyInput.render().$el)
             .prepend(controls.render().$el);
-
-    if (!this.model.isNew()) {
-       this.$el.find('#time-data').before(memoTagList.render().$el);
-    }
 
     this.makeMemoListDroppable();
 
@@ -70,7 +67,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
     var that = this;
 
     this.$el.droppable({
-      accept: ".tagId-list-item",
+      accept: ".tag-list-item",
       hoverClass: "active",
       drop: function (event, ui) {
         var tagId = ui.draggable.data('id');
