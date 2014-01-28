@@ -33,10 +33,13 @@ body {
   float: right;
 }
 
-.tag-list-item, .listgroup-item-heading {
+.listgroup-item-heading, .list-group-item {
   z-index: 500
 }
 
+.ui-draggable-dragging {
+  z-index: 999
+}
 
 
 input#new_tag_name {
@@ -74,7 +77,12 @@ input#new_tag_name {
 }
 
 #memo-sidebar .list-group{
-  max-height: 550px;
+  max-height: 500px;
   overflow: scroll
+}
+
+#editor {
+  margin-top: 55px;
+  min-height: 500px;
 }
 

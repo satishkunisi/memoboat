@@ -12,9 +12,7 @@
    
 
   <nav class="navbar navbar-default" role="navigation">
-      <a class="brand pull-left" href="<%= root_url %>"> 
-        <%= image_tag "/assets/memoboat_logo_reverse.png", size: "151x87" %>
-      </a>
+      
     
     <ul class="nav navbar-nav pull-right">
       <li>
@@ -33,6 +31,10 @@
         </li>
       <% end %> 
     </ul>
+
+    <a class="brand pull-left" href="<%= root_url %>"> 
+        <%= image_tag "/assets/memoboat_logo_reverse.png", size: "151x87" %>
+      </a>
   </nav>
 
    <% if flash[:errors] %>

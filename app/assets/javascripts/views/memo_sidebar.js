@@ -4,7 +4,7 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
     var that = this;
     this.notebookTitle = options.notebookTitle;
 
-    this.listenTo(this.collection, "add change remove reset", this.render);
+    this.listenTo(this.collection, "add change remove reset sort", this.render);
    
     Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
       that.removeMemo(memoId);
@@ -54,7 +54,15 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
     this.$el.find('.list-group-item').draggable({
       revert: "invalid",
       revertDuration: 200,
-      opacity: 0.35
+      opacity: 0.35,
+      scroll: true,
+      helper: 'clone',
+      start: function(){ //hide original when showing clone
+          $(this).hide();             
+      },
+      stop: function(){ //show original when hiding clone
+          $(this).show();
+      }
     });
   },
 

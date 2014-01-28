@@ -1,6 +1,6 @@
 Memoboat.Views.Editor = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "sync", this.render)
+    this.listenTo(this.model, "sync", this.render);
   },
 
   className: "col-xs-6 well well-lg",
@@ -56,6 +56,33 @@ Memoboat.Views.Editor = Backbone.View.extend({
        this.$el.find('#time-data').before(memoTagList.render().$el);
     }
 
+    this.makeMemoListDroppable();
+
     return this;
-  }
+  },
+
+  makeMemoListDroppable: function () {
+    var that = this;
+
+    this.$el.droppable({
+      accept: ".tag-list-item",
+      hoverClass: "active",
+      drop: function (event, ui) {
+        var tagId = ui.draggable.data('id');
+        var tag = Memoboat.userTags.get(tagId)
+
+        var tagging = new Memoboat.Models.Tagging({
+          memo_id: that.model.id,
+          tag_id: tagId
+        });
+
+        tagging.save({}, {
+          success: function () {
+            that.model.get('tags').add(tag);
+            that.model.fetch();
+          }
+        });
+      }
+    });
+  },
 })

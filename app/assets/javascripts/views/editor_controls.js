@@ -1,13 +1,18 @@
 Memoboat.Views.EditorControls = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, "destroy change", this.render)
-    this.listenTo(Memoboat.notebooks, "add change remove reset", this.render)
+    this.listenTo(Memoboat.notebooks, "add change remove reset sync", this.render)
+
+    var that = this; 
+
+    // Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
+    //   that.model.fetch();
+    // })
   },
 
   events: {
     "click button#memo-new": "newMemo",
     "click button#memo-trash": "trashMemo",
-    "click button#memo-save": "saveMemo",
     "change #memo-notebook-id": "changeNotebook"
   },
 
@@ -32,10 +37,6 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
         Memoboat.Routers.router.switchNotebook(notebookId);
       }
     });
-  },
-
-  saveMemo: function (event) {
-    event.preventDefault();
   },
 
   changeNotebook: function (event) {

@@ -17,12 +17,15 @@ Memoboat.Models.Memo = Backbone.Model.extend({
       memoId: attributes.id
     });
 
+    attributes.updated_at_as_date = Date.parse(attributes.updated_at);
+
     return attributes;
   },
 
   toJSON: function () {
     var attributes = _.clone(this.attributes);
     delete attributes.tags;
+    delete attributes.updated_at_as_date;
     return attributes;
   }
 })

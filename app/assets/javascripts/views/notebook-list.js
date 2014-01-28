@@ -17,20 +17,7 @@ Memoboat.Views.NotebookList = Backbone.View.extend({
 
   template: JST["notebook-list"],
 
-  render: function () {
-    var renderedContent = this.template({
-      notebooks: Memoboat.notebooks,
-      startNotebook: this.startNotebook
-    });
-
-    this.$el.html(renderedContent);
-
-    this._activeNotebook = this.$el.find("a.active");
-
-    this.makeNotebooksDroppable();
-
-    return this;
-  },
+  
 
   showMemos: function (event) {
     event.preventDefault();
@@ -103,6 +90,21 @@ Memoboat.Views.NotebookList = Backbone.View.extend({
         } 
       }
     });
+  },
+
+  render: function () {
+    var renderedContent = this.template({
+      notebooks: Memoboat.notebooks,
+      startNotebook: this.startNotebook
+    });
+
+    this.$el.html(renderedContent);
+
+    this._activeNotebook = this.$el.find("a.active");
+
+    this.makeNotebooksDroppable();
+
+    return this;
   },
 
    _swapActiveNotebook: function ($li) {

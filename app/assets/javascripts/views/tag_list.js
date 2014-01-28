@@ -32,8 +32,9 @@ Memoboat.Views.TagList = Backbone.View.extend({
     this.$el.find('.tag-list-item').draggable({
       revert: "invalid",
       revertDuration: 200,
-      helper: 'clone',
-      opacity: 0.35
+      scroll: false,
+      opacity: 0.35,
+      helper: 'clone'
     });
   }
 })

@@ -56,9 +56,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   switchTaggedMemoEditor: function (memos, memoId) {
     var that = this;
 
-    var memo = new Memoboat.Models.Memo({
-      id: memoId
-    })
+    var memo = memos.get(memoId);
 
     memo.fetch({
       success: function () {

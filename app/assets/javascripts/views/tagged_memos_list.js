@@ -2,12 +2,8 @@ Memoboat.Views.TaggedMemosList = Backbone.View.extend({
 
   initialize: function () {
     var that = this;
-
     this.listenTo(this.collection, "add change remove reset", this.render);
-   
-    Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
-      that.removeMemo(memoId);
-    })
+  
   },
 
   events: {
@@ -34,6 +30,16 @@ Memoboat.Views.TaggedMemosList = Backbone.View.extend({
     Memoboat.Routers.router.switchTaggedMemoEditor(this.collection, memoId);
   },
 
+  makeMemosDraggable: function () {
+    this.$el.find('.list-group-item').draggable({
+      revert: "invalid",
+      revertDuration: 200,
+      opacity: 0.35,
+      scroll: true,
+      helper: 'clone'
+    });
+  },
+
   render: function () {
     var renderedContent = this.template({
       memos: this.collection,
@@ -42,9 +48,10 @@ Memoboat.Views.TaggedMemosList = Backbone.View.extend({
 
     this.$el.html(renderedContent);
 
+    this.makeMemosDraggable();
+
     return this;
   },
-
 
   _swapActiveMemo: function ($memo) {
     this._activeMemo && this._activeMemo.removeClass('active');

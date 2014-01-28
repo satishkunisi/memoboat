@@ -12,7 +12,7 @@ Memoboat.Collections.Memos = Backbone.Collection.extend({
   },
 
   comparator: function (memo) {
-    return memo.updatedAt;
+    return -memo.get('updated_at_as_date');
   }
   
 })
