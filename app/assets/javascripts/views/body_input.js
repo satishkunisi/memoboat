@@ -19,7 +19,7 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
         this.saveNote();
       }
 
-    }, 3000),
+    }, 2000),
 
   saveNote: function (event) {
     if (event) { 
