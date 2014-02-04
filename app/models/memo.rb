@@ -13,7 +13,7 @@ class Memo < ActiveRecord::Base
 
   has_one :author, :through => :notebook, :source => :user
 
-  has_many :taggings
+  has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings, :source => :tag
 
   def generate_default_title

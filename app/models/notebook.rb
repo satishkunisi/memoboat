@@ -12,6 +12,7 @@ class Notebook < ActiveRecord::Base
   has_many :memos,
            :class_name => "Memo",
            :foreign_key => :notebook_id,
-           :primary_key => :id
+           :primary_key => :id,
+           :dependent => :destroy
 
 end
