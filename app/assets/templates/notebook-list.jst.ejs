@@ -1,5 +1,5 @@
 <div class="list-group" id="notebook-list">
-  <% notebooks.forEach(function (notebook) { %>
+  <% notebooks.forEach(function (notebook, index) { %>
     <a href="#" data-id="<%= notebook.id %>" 
       <% if (startNotebook === notebook.id) { %>
         class="list-group-item notebook-item active">
@@ -12,9 +12,12 @@
         <span class="glyphicon glyphicon-folder-close"></span>
           <%= notebook.get('title') %>
       </span>
-      <span data-id="<%= notebook.id %>" class="close pull-right">
-        &times;
-      </span>
+
+      <% if (index !== 0) { %>
+        <span data-id="<%= notebook.id %>" class="close pull-right">
+          &times;
+        </span>
+      <% } %>
     </a>
   <% }) %>
 </div>

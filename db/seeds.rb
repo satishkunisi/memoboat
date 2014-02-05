@@ -11,8 +11,7 @@ ActiveRecord::Base.transaction do
   notebook = u.notebooks.first
 
   memos = [ {title: 'Welcome to MemoBoat!', 
-             body: 'MemoBoat is an Evenote-inspired, cloud note-taking app. 
-                   It features drag and drop and auto-saving.'},
+             body: 'MemoBoat is an Evenote-inspired, cloud note-taking app. It features drag and drop and auto-saving.'},
             {title: 'Auto-saving', 
              body: 'MemoBoat uses _.debounce to auto-save notes as you type'},
             {title: 'Drag and Drop',
@@ -20,4 +19,21 @@ ActiveRecord::Base.transaction do
           ]
 
   notebook.memos.create!(memos)
+
+  rails = u.tags.new(:name => 'rails') 
+  backbone = u.tags.new(:name => 'backbone.js')
+  features = u.tags.new(:name => 'features')
+
+  [rails, backbone, features].each { |tag| tag.save! }
+
+  welcome = Memo.find_by_title('Welcome to MemoBoat!')
+  welcome.taggings.create!({:tag_id => rails.id}) 
+  welcome.taggings.create!({:tag_id => backbone.id})
+
+  Memo.find_by_title('Auto-saving').taggings.create!(:tag_id => features.id)
+  Memo.find_by_title('Drag and Drop').taggings.create!(:tag_id => features.id)
+
+  n = u.notebooks.create!(:title => 'Test Notebook')
+  n.memos.create!(:title => 'Drag me!', :body => 'Drag me to a notebook, please.')
+
 end
