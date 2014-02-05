@@ -32,8 +32,4 @@ ActiveRecord::Base.transaction do
 
   Memo.find_by_title('Auto-saving').taggings.create!(:tag_id => features.id)
   Memo.find_by_title('Drag and Drop').taggings.create!(:tag_id => features.id)
-
-  n = u.notebooks.create!(:title => 'Test Notebook')
-  n.memos.create!(:title => 'Drag me!', :body => 'Drag me to a notebook, please.')
-
 end
