@@ -11,7 +11,6 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   },
 
   autoSave: _.debounce(function () {
-      console.log("in here");
       var newBody = $('#memo_body').val();
       var oldBody = this.model.get('body');
 
@@ -33,11 +32,19 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
     bodyData["memo"]["title"] = $('#memo_title').val();
     bodyData["memo"]["body"] = $('#memo_body').val();
 
+    function triggerSort () {
+      Memoboat.Vents.vent.trigger("memoList:reRender");
+    }
+
     if (this.model.isNew()) {
       this.model.set(bodyData["memo"])
-      this.collection.create(this.model);
+      this.collection.create(this.model, {
+        success: triggerSort
+      });
     } else {
-      this.model.save(bodyData["memo"]);
+      this.model.save(bodyData["memo"], {
+        success: triggerSort
+      });
     }
   },
 

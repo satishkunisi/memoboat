@@ -32,13 +32,20 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
     titleData["memo"]["title"] = $('#memo_title').val();
     titleData["memo"]["body"] = $('#memo_body').val();
 
+    function triggerSort () {
+      Memoboat.Vents.vent.trigger("memoList:reRender");
+    }
 
     if (this.model.isNew()) {
       this.model.set(titleData["memo"])
-      this.collection.create(this.model)
+      this.collection.create(this.model, {
+        success: triggerSort
+      })
     } else {
       this.model.set(titleData["memo"])
-      this.model.save({});
+      this.model.save({}, {
+        success: triggerSort
+      });
     }
   },
 

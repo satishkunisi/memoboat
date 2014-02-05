@@ -2,17 +2,21 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
 
   initialize: function (options) {
     var that = this;
+
     this.notebookTitle = options.notebookTitle;
 
     this.listenTo(this.collection, "add change remove reset sort sync", this.render);
    
     Memoboat.Vents.vent.on("memo:changeNotebook", function (memoId) {
       that.removeMemo(memoId);
-    })
+    });
 
-    this.timer = setInterval(function () {
-       that.collection.fetch();
-    }, 10000);
+    Memoboat.Vents.vent.on("memoList:reRender", function () {
+      that.collection.sort();
+      that.render();
+    });
+    
+    this.autoupdate();
   },
 
   events: {
@@ -68,6 +72,12 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
           $(this).show();
       }
     });
+  },
+
+  autoupdate: function () {
+    var reRender = setInterval(function () {
+        Memoboat.Vents.vent.trigger("memoList:reRender");
+    }, 60000);
   },
 
   _swapActiveMemo: function ($memo) {
