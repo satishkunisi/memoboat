@@ -8,46 +8,62 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
   id: "create-tag-form",
   
   events: {
-    "click button#create-new-tag": "createTag"
+    "keydown #add-tag-input": "tagMemo"
   },
 
   tagName: "li",
 
-  createTag: function (event) {
+  tagMemo: function (event) {
+
+    if (event.which !== 13) {
+      return;
+    }
     
     event.preventDefault();
-
     var that = this;
 
     var formData = $(event.target.form).serializeJSON();
-    var newTagName = formData["new_tag"]["name"];
+    var tagName = formData["new_tag"]["name"];
+
+    var matchingTag = Memoboat.userTags.where({name: tagName})[0];
+
+    if (matchingTag) {
+      this.addTagging(matchingTag)
+    } else {
+      this.createTag(tagName)
+    }
+  },
+
+  createTag: function (tagName) {
+    var that = this;
 
     var tag = new Memoboat.Models.Tag({
-      name: newTagName 
+      name: tagName 
     })
 
     tag.save({}, {
       success: function () {
-        createTagging();
+        that.addTagging(tag);
         Memoboat.userTags.add(tag);
       }
     })
-
-    function createTagging () {
-      var tagging = new Memoboat.Models.Tagging({
-        memo_id: that.model.id,
-        tag_id: tag.id
-      });
-
-      tagging.save({},{
-        success: function () {
-          that.model.get('tags').add(tag);
-          that.model.fetch();
-        }
-      });
-    }
     
+  },
 
+  addTagging: function (tag) {
+    var that = this;
+
+    var tagging = new Memoboat.Models.Tagging({
+      memo_id: this.model.id,
+      tag_id: tag.id
+    });
+
+    tagging.save({}, {
+      success: function () {
+        that.model.get('tags').add(tag);
+        that.model.fetch();
+      }
+    });
   },
 
 
@@ -59,8 +75,26 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
       disabled: disabled
     });
 
+    var tags = new Bloodhound({
+     datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.name); },
+     queryTokenizer: Bloodhound.tokenizers.whitespace,
+     local: Memoboat.userTags.allNames()
+    });
+ 
+    // initialize the bloodhound suggestion engine
+    tags.initialize();
+     
+    // instantiate the typeahead UI
+
     this.$el.html(renderedContent);
 
-    return this
+
+    this.$el.find('.twitter-typeahead')
+            .typeahead(null, {
+              displayKey: 'name',
+              source: tags.ttAdapter()
+            })
+
+    return this;
   }
 })

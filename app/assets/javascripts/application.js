@@ -17,7 +17,7 @@
 //= require chosen.jquery
 //= require underscore.min
 //= require backbone
-//= require typeahead
+//= require typeahead.bundle
 //= require bootstrap
 //= require moment.min
 //= require memoboat

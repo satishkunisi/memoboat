@@ -11,17 +11,8 @@ Memoboat.Views.TagControls = Backbone.View.extend({
 
 
   render: function () {
-    this.installTagMemoForm();
     this.installAddTagForm();
     return this;
-  },
-
-  installTagMemoForm: function () {
-    var view = new Memoboat.Views.TagMemoForm({
-      model: this.model
-    });
-
-    this.$el.append(view.render().$el);
   },
 
   installAddTagForm: function () {

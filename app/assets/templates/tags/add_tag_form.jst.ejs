@@ -1,18 +1,11 @@
 <form>
   <input type="text" 
-         class="form-control" 
-         id="new_tag_name" 
+         class="form-control twitter-typeahead"
+         id="add-tag-input"
+         placeholder="+ Add Tag"
          name="new_tag[name]"
          <% if (disabled) { %>
            disabled
          <% } %>
          >
-  <button type="submit"
-      id="create-new-tag" 
-      class="btn btn-primary"
-      <% if (disabled) { %>
-        disabled
-      <% } %>>
-      New Tag
-  </button>
 </form>
