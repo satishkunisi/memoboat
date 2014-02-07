@@ -11,14 +11,12 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
     "keydown #add-tag-input": "tagMemo"
   },
 
-  tagName: "li",
-
   tagMemo: function (event) {
 
     if (event.which !== 13) {
       return;
     }
-    
+
     event.preventDefault();
     var that = this;
 

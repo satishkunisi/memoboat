@@ -22,7 +22,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
       memo: this.model
     });
 
-    var tag_controls = new Memoboat.Views.TagControls({
+    var addTagForm = new Memoboat.Views.AddTagForm({
       model: this.model
     });
 
@@ -51,7 +51,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
                  
     this.$el.html(mainContent)
 
-    this.$el.append(tag_controls.render().$el)
+    this.$el.append(addTagForm.render().$el)
             .append(memoTagList.render().$el)
             .append(timeData.render().$el)
             .append(titleInput.render().$el)
