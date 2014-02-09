@@ -64,4 +64,13 @@ Memoboat::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'memoboat',
+      :access_key_id => ENV["AWS_KEY_ID"],
+      :secret_access_key => ENV["AWS_SECRET_KEY"],
+      :s3_host_name => 's3-us-west-1.amazonaws.com'
+    }
+  }
 end

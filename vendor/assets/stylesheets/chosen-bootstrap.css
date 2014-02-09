@@ -1,6 +1,6 @@
 select.form-control + .chosen-container.chosen-container-single .chosen-single {
     display: block;
-    width: 100%;
+    width: 200px;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -31,7 +31,7 @@ select.form-control + .chosen-container .chosen-drop {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     background-clip: padding-box;
     margin: 2px 0 0;
-
+    width: 200px;
 }
 
 select.form-control + .chosen-container .chosen-search input[type=text] {

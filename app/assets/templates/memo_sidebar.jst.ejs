@@ -16,7 +16,13 @@
         <span class="glyphicon glyphicon-time"></span>
         <%= moment(memo.get('updated_at')).fromNow() %>
       </p>
-      <p class="list-group-item-text text-muted"><%= memo.preview() %></p>
+
+      <p class="list-group-item-text text-muted">
+        <% if (memo.get('image_small_url') !== "/images/small/missing.png") { %>
+          <img class="img-thumbnail" src="<%= memo.get('image_small_url') %>">
+        <% } %>
+        <%= memo.preview() %>
+      </p>
     </a>
   <% }) %>
 </div>

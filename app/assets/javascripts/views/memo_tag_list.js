@@ -10,6 +10,10 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
 
   id: "memo-tag-list",
 
+  className: "list-inline",
+
+  tagName: "ul",
+
   template: JST["tags/memo_tag_list"],
 
   deleteTagging: function (event) {
@@ -46,6 +50,14 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
     }
   },
 
+  installTagForm: function () {
+    var addTagForm = new Memoboat.Views.AddTagForm({
+      model: this.model
+    });
+
+    this.$el.find('li:last').after(addTagForm.render().$el);
+  },
+
   render: function () {
 
     this.installTagsListener();
@@ -55,6 +67,8 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
     });
 
     this.$el.html(renderedContent);
+
+    this.installTagForm();
 
     return this;
   }

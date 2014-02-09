@@ -22,10 +22,6 @@ Memoboat.Views.Editor = Backbone.View.extend({
       memo: this.model
     });
 
-    var addTagForm = new Memoboat.Views.AddTagForm({
-      model: this.model
-    });
-
     var controls = new Memoboat.Views.EditorControls({
       model: this.model,
       collection: this.collection
@@ -40,6 +36,11 @@ Memoboat.Views.Editor = Backbone.View.extend({
       collection: this.collection
     });
 
+    var imageForm = new Memoboat.Views.ImageForm({
+      model: this.model,
+      collection: this.collection
+    })
+
     var bodyInput = new Memoboat.Views.BodyInput({
       model: this.model,
       collection: this.collection
@@ -51,9 +52,9 @@ Memoboat.Views.Editor = Backbone.View.extend({
                  
     this.$el.html(mainContent)
 
-    this.$el.append(addTagForm.render().$el)
-            .append(memoTagList.render().$el)
+    this.$el.append(memoTagList.render().$el)
             .append(timeData.render().$el)
+            .append(imageForm.render().$el)
             .append(titleInput.render().$el)
             .append(bodyInput.render().$el)
             .prepend(controls.render().$el);

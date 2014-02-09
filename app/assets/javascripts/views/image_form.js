@@ -1,0 +1,61 @@
+Memoboat.Views.ImageForm = Backbone.View.extend({
+  template: JST['editor/image_form'],
+
+  id: 'image-form',
+
+  events: {
+    "change #attachment": "attachImage"
+  }, 
+
+  render: function () {
+    var renderedContent = this.template();
+
+    this.$el.html(renderedContent);
+    return this;
+  },
+
+  attachImage: function (event) {
+    var that = this;
+
+    var file = $('#attachment').get(0).files[0]
+    var reader = new FileReader();
+    var imageURL;
+
+    reader.onload = function () {
+      that.saveNote(event, this.result);
+    }
+
+    reader.readAsDataURL(file);
+  },
+
+  saveNote: function (event, imageData) {
+    
+    if (event) { 
+      event.preventDefault(); 
+    }
+
+    var that = this;
+    var memoData = {memo: {}};
+
+    memoData["memo"]["title"] = $('#memo_title').val();
+    memoData["memo"]["body"] = $('#memo_body').val();
+    memoData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
+    memoData["memo"]["image"] = imageData;
+
+    function triggerSort () {
+      Memoboat.Vents.vent.trigger("memoList:reRender");
+    }
+
+    if (this.model.isNew()) {
+      this.model.set(memoData["memo"])
+      this.collection.create(this.model, {
+        success: triggerSort
+      });
+    } else {
+      this.model.save(memoData["memo"], {
+        success: triggerSort
+      });
+    }
+  },
+
+})

@@ -13,4 +13,6 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 
 gem 'bcrypt-ruby', '~> 3.0.0', :require => 'bcrypt'
-
+gem 'figaro'
+gem 'paperclip'
+gem 'aws-sdk'

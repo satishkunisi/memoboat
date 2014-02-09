@@ -10,6 +10,8 @@ Memoboat.Views.NotebookList = Backbone.View.extend({
   
   },
 
+  id: "notebook-list",
+
   events: {
     "click span.close": "deleteNotebook",
     "click .notebook-item": "showMemos"
