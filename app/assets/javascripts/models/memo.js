@@ -11,6 +11,18 @@ Memoboat.Models.Memo = Backbone.Model.extend({
     
   },
 
+  shortTitle: function () {
+    if (this.get('title').length < 16) {
+      return this.get('title');
+    } else {
+      return this.get('title').slice(0, 13) + "...";
+    }
+  },
+
+  hasImage: function () {
+    return this.get('image_small_url') !== "/images/small/missing.png"
+  },
+
   parse: function (attributes) {
     Memoboat.userTags.add(attributes.tags)
     attributes.tags = new Memoboat.Collections.Tags(attributes.tags, {
@@ -25,7 +37,11 @@ Memoboat.Models.Memo = Backbone.Model.extend({
   toJSON: function () {
     var attributes = _.clone(this.attributes);
     delete attributes.tags;
-    delete attributes.updated_at_as_date;
+
+    ["updated_at_as_date", "image_small_url", "image_big_url"].forEach(function (attr) {
+      delete attributes[attr];
+    });
+
     return attributes;
   }
 })

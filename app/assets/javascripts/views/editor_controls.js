@@ -1,6 +1,6 @@
 Memoboat.Views.EditorControls = Backbone.View.extend({
   initialize: function () {
-    this.listenTo(this.model, "destroy change", this.render)
+    this.listenTo(this.model, "all", this.render)
     this.listenTo(Memoboat.notebooks, "add change remove reset sync", this.render)
   },
 
@@ -34,7 +34,6 @@ Memoboat.Views.EditorControls = Backbone.View.extend({
   },
 
   changeNotebook: function (event) {
-    event.preventDefault();
     var that = this;
     var notebookId = $(event.target).val();
 

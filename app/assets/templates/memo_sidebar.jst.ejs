@@ -10,7 +10,7 @@
                 data-nb-id="<%= memos.notebookId %>">
 
       <h4 class="list-group-item-heading">
-        <%= memo.get('title') %>
+        <%= memo.shortTitle() %>
       </h4>
       <p class="list-group-item-text text-success">
         <span class="glyphicon glyphicon-time"></span>
@@ -18,11 +18,12 @@
       </p>
 
       <p class="list-group-item-text text-muted">
-        <% if (memo.get('image_small_url') !== "/images/small/missing.png") { %>
-          <img class="img-thumbnail" src="<%= memo.get('image_small_url') %>">
-        <% } %>
         <%= memo.preview() %>
       </p>
+
+      <% if (memo.hasImage()) { %>
+        <img src="<%= memo.get('image_small_url') %>">
+      <% } %>
     </a>
   <% }) %>
 </div>

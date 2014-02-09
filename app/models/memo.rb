@@ -18,7 +18,7 @@ class Memo < ActiveRecord::Base
 
   has_attached_file :image, :styles => {
     :big => "300x300>",
-    :small => "50x100>"
+    :small => "100x100#"
   }
 
   validates_attachment_content_type :image, 

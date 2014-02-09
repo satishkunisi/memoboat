@@ -6,19 +6,20 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   template: JST['editor/body_input'],
 
   events: {
-    "keyup textarea": "autoSave",
+    "keyup #memo_body": "autoSave",
     "click button#memo-save": "autoSave"
   },
 
   autoSave: _.debounce(function () {
-      var newBody = $('#memo_body').val();
+      console.log("here")
+      var newBody = $('#memo_body').text();
       var oldBody = this.model.get('body');
 
       if (newBody !== oldBody) {
         this.saveNote();
       }
 
-    }, 2000),
+    }, 500),
 
   saveNote: function (event) {
     if (event) { 
@@ -30,7 +31,7 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
 
     bodyData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
     bodyData["memo"]["title"] = $('#memo_title').val();
-    bodyData["memo"]["body"] = $('#memo_body').val();
+    bodyData["memo"]["body"] = $('#memo_body').text();
 
     function triggerSort () {
       Memoboat.Vents.vent.trigger("memoList:reRender");

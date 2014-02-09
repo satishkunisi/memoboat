@@ -2,7 +2,12 @@
 <%   var body_content = memo.get('body');  %>
 <% } %>
 
-  <textarea class="form-control"
-            id="memo_body"
-            name="memo[body]"
-            rows=8><%= body_content %></textarea>
+  <div id="memo_body"
+       name="memo[body]"
+       contenteditable="true">
+
+       <%= body_content %>
+  </div>
+   <% if (memo.hasImage()) { %>
+     <img src="<%= memo.get('image_big_url')%>" class="img-thumbnail">
+   <% } %> 

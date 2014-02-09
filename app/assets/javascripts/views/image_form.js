@@ -4,20 +4,28 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
   id: 'image-form',
 
   events: {
-    "change #attachment": "attachImage"
+    "click #attach-image-icon": "triggerAttachment",
+    "change #attach-image": "attachImage"
   }, 
 
   render: function () {
-    var renderedContent = this.template();
+    var renderedContent = this.template({
+      memo: this.model
+    });
 
     this.$el.html(renderedContent);
     return this;
   },
 
+  triggerAttachment: function (event) {
+    event.preventDefault()
+    $('#attach-image').click();
+  },
+
   attachImage: function (event) {
     var that = this;
 
-    var file = $('#attachment').get(0).files[0]
+    var file = $('#attach-image').get(0).files[0]
     var reader = new FileReader();
     var imageURL;
 
