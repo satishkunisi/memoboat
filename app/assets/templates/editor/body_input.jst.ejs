@@ -4,10 +4,11 @@
 
   <div id="memo_body"
        name="memo[body]"
-       contenteditable="true">
+       contenteditable="true"
+       data-ph="...to create a new memo.">
 
        <%= body_content %>
   </div>
-   <% if (memo.hasImage()) { %>
+   <% if ((!memo.isNew()) && memo.hasImage()) { %>
      <img src="<%= memo.get('image_big_url')%>" class="img-thumbnail">
    <% } %> 

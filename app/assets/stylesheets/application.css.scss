@@ -51,13 +51,34 @@
   display: none
 }
 
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
+
 body {
   min-width: 900px;
+}
+
+body {
+  font-family: Courier, serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: Courier New, Courier, serif;
+  font-weight: bold
 }
 
 
 .brand {
   margin: 10px 30px;
+}
+
+#body-input {
+  width: 100%;
+  max-height: 300px;
+  overflow: scroll;
 }
 
 #change-memo-notebook {
@@ -79,12 +100,28 @@ body {
   margin-top: 10px;
   clear: both;
   float: left;
+  width: 90%
 }
 
+
 #memo_body {
-  max-height: 300px;
+  float: left;
+  clear: both;
+  width: 90%;
+  font-family: Courier New, Courier, serif;
+  height: 100px;
   overflow: scroll;
   outline: none;
+  margin: 10px 0;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+  content:attr(data-ph)
+}
+
+img.img-thumbnail {
+  clear: both;
+  float:left
 }
 
 #memo-button-controls {
@@ -95,6 +132,11 @@ body {
   height: 130px;
 }
 
+.memo-item h4 {
+  font-family: Courier, serif;
+  font-size: 16px
+}
+
 .memo-item img {
   margin-top: -40px;
   display: inline;
@@ -102,17 +144,12 @@ body {
 }
 
 .memo-item p {
-  width: 65%;
   clear: both;
   float: left
 }
 
-.memo-item h4 {
-  display: inline;
-  float: left;
-}
-
 .memo-item p.text-muted {
+  font-family: Courier New, Courier, serif;
   border-top: 1px dotted #ccc;
   padding-top: 10px;
   margin-top: 5px;
@@ -120,7 +157,40 @@ body {
 }
 
 .memo-item p.text-success {
-  width: 50%;
+  float: left;
+}
+
+#memo_title {
+  float: left;
+  clear: both;
+  width: 90%;
+  border: none;
+  outline: none;
+  font-family: Courier New;
+  font-weight: bold;
+  font-size: 24px;
+  border-bottom: 3px solid #ccc
+}
+
+
+#memo_title:hover, #memo_body:hover {
+  cursor: text
+}
+
+#memo_title:focus {
+  outline: none;
+}
+
+.min_size {
+  width: 65%;
+}
+
+.max_size {
+  width: 90%
+}
+
+.memo-item h4 {
+  display: inline;
   float: left;
 }
 
@@ -169,6 +239,9 @@ ul#memo-tag-list {
 #time-data {
   float: left;
   clear: both;
+  padding: 5px 0;
+  border-bottom: 2px solid #ccc;
+  width: 100%
 }
 
 .ui-draggable-dragging {

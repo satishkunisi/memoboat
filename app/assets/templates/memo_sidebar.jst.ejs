@@ -10,14 +10,24 @@
                 data-nb-id="<%= memos.notebookId %>">
 
       <h4 class="list-group-item-heading">
-        <%= memo.shortTitle() %>
+        <% if (memo.hasImage()) { %>
+          <%= memo.shortTitle() %>
+        <% } else { %>
+          <%= memo.get('title') %>
+        <% } %>
       </h4>
       <p class="list-group-item-text text-success">
         <span class="glyphicon glyphicon-time"></span>
         <%= moment(memo.get('updated_at')).fromNow() %>
       </p>
 
-      <p class="list-group-item-text text-muted">
+      <p class="list-group-item-text 
+               <% if (!memo.hasImage()) { %>
+                  max_size
+               <% } else { %>
+                  min_size
+               <% } %>
+               text-muted">
         <%= memo.preview() %>
       </p>
 

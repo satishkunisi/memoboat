@@ -1,6 +1,5 @@
 Memoboat.Views.TitleInput = Backbone.View.extend({
   initialize: function () {
-    //this.listenTo(this.model, "change:title remove sync", this.render)
   },
 
   events: {
@@ -30,7 +29,7 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
 
     titleData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
     titleData["memo"]["title"] = $('#memo_title').val();
-    titleData["memo"]["body"] = $('#memo_body').text();
+    titleData["memo"]["body"] = $.trim($('#memo_body').text());
 
     function triggerSort () {
       Memoboat.Vents.vent.trigger("memoList:reRender");

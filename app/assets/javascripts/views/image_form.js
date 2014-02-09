@@ -46,7 +46,7 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
     var memoData = {memo: {}};
 
     memoData["memo"]["title"] = $('#memo_title').val();
-    memoData["memo"]["body"] = $('#memo_body').val();
+    memoData["memo"]["body"] = $.trim($('#memo_body').text());
     memoData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
     memoData["memo"]["image"] = imageData;
 
@@ -54,13 +54,14 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
       Memoboat.Vents.vent.trigger("memoList:reRender");
     }
 
+    this.model.set(memoData["memo"])
+
     if (this.model.isNew()) {
-      this.model.set(memoData["memo"])
       this.collection.create(this.model, {
         success: triggerSort
       });
     } else {
-      this.model.save(memoData["memo"], {
+      this.model.save({}, {
         success: triggerSort
       });
     }

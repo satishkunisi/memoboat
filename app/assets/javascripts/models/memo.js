@@ -15,12 +15,14 @@ Memoboat.Models.Memo = Backbone.Model.extend({
     if (this.get('title').length < 16) {
       return this.get('title');
     } else {
-      return this.get('title').slice(0, 13) + "...";
+      return this.get('title').slice(0, 16) + "...";
     }
   },
 
   hasImage: function () {
-    return this.get('image_small_url') !== "/images/small/missing.png"
+    var title = this.get('image_small_url');
+
+    return !(!title || (title === "/images/small/missing.png"))
   },
 
   parse: function (attributes) {

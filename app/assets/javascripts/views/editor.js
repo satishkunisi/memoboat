@@ -53,11 +53,11 @@ Memoboat.Views.Editor = Backbone.View.extend({
     this.$el.html(mainContent)
 
     this.$el.append(memoTagList.render().$el)
-            .append(timeData.render().$el)
             .append(imageForm.render().$el)
             .append(titleInput.render().$el)
             .append(bodyInput.render().$el)
-            .prepend(controls.render().$el);
+            .prepend(controls.render().$el)
+            .prepend(timeData.render().$el);
 
     this.makeMemoListDroppable();
 

@@ -1,7 +1,9 @@
 Memoboat.Views.BodyInput = Backbone.View.extend({
   initialize: function () {
-    //this.listenTo(this.model, "change remove sync", this.render)
+    this.listenTo(this.model, "change:image_big_url", this.render)
   },
+
+  id: "body-input",
 
   template: JST['editor/body_input'],
 
@@ -11,7 +13,6 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   },
 
   autoSave: _.debounce(function () {
-      console.log("here")
       var newBody = $('#memo_body').text();
       var oldBody = this.model.get('body');
 
@@ -31,7 +32,7 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
 
     bodyData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
     bodyData["memo"]["title"] = $('#memo_title').val();
-    bodyData["memo"]["body"] = $('#memo_body').text();
+    bodyData["memo"]["body"] = $.trim($('#memo_body').text());
 
     function triggerSort () {
       Memoboat.Vents.vent.trigger("memoList:reRender");
@@ -50,6 +51,7 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   },
 
   render: function () {
+    console.log("rerender")
     var renderedContent = this.template({
       memo: this.model
     });
