@@ -1,10 +1,16 @@
 Memoboat.Views.ImageForm = Backbone.View.extend({
+
+  initialize: function () {
+    this.listenTo(this.model, "change:image_big_url", this.render)
+  },
+
   template: JST['editor/image_form'],
 
   id: 'image-form',
 
   events: {
-    "click #attach-image-icon": "triggerAttachment",
+    "click .attach-image": "triggerAttachment",
+    "click .remove-attachment": "removeAttachment",
     "change #attach-image": "attachImage"
   }, 
 
@@ -34,6 +40,10 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
     }
 
     reader.readAsDataURL(file);
+  },
+
+  removeAttachment: function (event) {
+    this.saveNote(event, null);
   },
 
   saveNote: function (event, imageData) {

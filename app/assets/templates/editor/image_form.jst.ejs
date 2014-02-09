@@ -1,4 +1,11 @@
 <div class="form-group">
-  <span id="attach-image-icon" class="glyphicon glyphicon-paperclip"></span>
+  
+  <% if (!memo.hasImage()) { %>
+    <span id="attach-image-icon" class="glyphicon glyphicon-paperclip attach-image"></span>
+    <span class="text-danger attach-image">Attach Image</span>
+  <% } else { %>
+    <span id="remove-image-icon" class="glyphicon glyphicon-remove remove-attachment"></span>
+    <span class="text-danger remove-attachment">Remove Image</span>
+  <% } %>
   <input type="file" id="attach-image">
 </div>
