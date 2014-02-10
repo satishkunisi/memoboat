@@ -17,7 +17,7 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
       var oldBody = this.model.get('body');
 
       if (newBody !== oldBody) {
-        this.saveNote();
+        this.saveNote(event);
       }
 
     }, 500),
