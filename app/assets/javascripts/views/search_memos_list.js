@@ -2,7 +2,7 @@ Memoboat.Views.SearchMemosList = Backbone.View.extend({
 
   initialize: function () {
     var that = this;
-    this.listenTo(this.collection, "add change remove reset", this.render);
+    this.listenTo(this.collection, "add remove reset", this.render);
   
   },
 
