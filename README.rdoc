@@ -1,1 +1,3 @@
 == Welcome to MemoBoat
+
+MemoBoat is an Evernote-inspired cloud note-taking app. 

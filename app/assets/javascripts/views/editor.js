@@ -17,7 +17,6 @@ Memoboat.Views.Editor = Backbone.View.extend({
   },
 
   render: function () {
-
     var mainContent = this.template({
       memo: this.model
     });
@@ -49,6 +48,7 @@ Memoboat.Views.Editor = Backbone.View.extend({
     var memoTagList = new Memoboat.Views.MemoTagList({
       model: this.model
     });
+
                  
     this.$el.html(mainContent)
 

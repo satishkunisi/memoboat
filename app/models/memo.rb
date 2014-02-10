@@ -1,8 +1,12 @@
 class Memo < ActiveRecord::Base
+  include PgSearch
+
   attr_accessible :title, :body, :notebook_id, :image
 
   validates :title, :notebook_id, :presence => true
   validates :body, :length => {:maximum => 4000}
+
+  pg_search_scope :search_text, :against => {:title => 'A', :body => 'B'}
   
   before_validation :generate_default_title
 

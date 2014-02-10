@@ -22,6 +22,43 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     });
   },
 
+  searchView: function (query) {
+
+    var that = this;
+
+    function createSearchView () {
+      search = new Memoboat.Models.Search({
+        id: query
+      })
+
+      search.fetch({
+        success: function () {
+          var memos = search.get('memos');
+          var searchMemosList = new Memoboat.Views.SearchMemosList({
+            model: search,
+            collection: memos
+          })
+
+          that._swapMemoList(searchMemosList);
+        },
+
+        error: function () {
+          var noResults = '<div class="alert alert-warning">No Results Found</div>'
+          $('#search-box').before(noResults);
+          $('.alert-warning').fadeOut(3000);
+        }
+      });
+     
+    }
+    
+    if ($('#notebook-sidebar').length === 0) {
+      this.installNotebooksSidebar(createTagView, id);
+    } else {
+      createSearchView();
+    }
+  },
+
+
   tagView: function (id) {
 
     var that = this;
@@ -92,6 +129,15 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     });
   },
 
+  installSearchBar: function () {
+    if ($('#search-box').length > 0) {
+      return;
+    }
+
+    var searchBox = new Memoboat.Views.SearchView();
+    this.$rootEl.append(searchBox.render().$el);
+  },
+
   switchNotebook: function (id, memoId) {
     var that = this;
 
@@ -132,6 +178,8 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   },
 
   switchEditor: function (memos, memoId) {
+    this.installSearchBar();
+
     var that = this;
 
     var memo = memos.get(memoId);

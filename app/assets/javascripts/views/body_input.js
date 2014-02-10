@@ -51,7 +51,6 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
   },
 
   render: function () {
-    console.log("rerender")
     var renderedContent = this.template({
       memo: this.model
     });

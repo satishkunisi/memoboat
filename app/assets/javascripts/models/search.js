@@ -1,8 +1,9 @@
-Memoboat.Models.Tag = Backbone.Model.extend({
-  urlRoot: "api/tags",
-  
+Memoboat.Models.Search = Backbone.Model.extend({
+  urlRoot: "api/search",
+
   parse: function (attributes) {
-    attributes.memos = new Memoboat.Collections.TaggedMemos(attributes.memos);
+    var memos = new Memoboat.Collections.SearchMemos(attributes.memos);
+    attributes.memos = memos;
     return attributes;
   },
 
@@ -11,4 +12,5 @@ Memoboat.Models.Tag = Backbone.Model.extend({
     delete attributes.memos;
     return attributes;
   }
+
 })
