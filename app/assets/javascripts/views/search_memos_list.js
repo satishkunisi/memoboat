@@ -40,24 +40,6 @@ Memoboat.Views.SearchMemosList = Backbone.View.extend({
     });
   },
 
-  searchAndHighlight: function (searchTerm) {
-    if (searchTerm) {
-        var wholeWordOnly = new RegExp("\\b"+searchTerm+"\\b","ig"); //matches whole word only
-        //var anyCharacter = new RegExp("\\g["+searchTerm+"]\\g","ig"); //matches any word with any of search chars characters
-                                 //default selector is body if none provided
-        //var searchTermRegEx = new RegExp(searchTerm,"ig");
-        var matches = this.$el.text().match(wholeWordOnly);
-        console.log(matches)
-        if(matches) {
-          console.log(matches)
-          this.$el.html(this.$el.html()
-                                .replace(wholeWordOnly, "<span class='highlight'>"+searchTerm+"</span>"));
-          return true;
-        }
-    }
-    return false;
-  },
-
   render: function () {
     var renderedContent = this.template({
       memos: this.collection,
@@ -66,7 +48,7 @@ Memoboat.Views.SearchMemosList = Backbone.View.extend({
 
     this.$el.html(renderedContent);
 
-    this.searchAndHighlight(this.model.id);
+    this.$el.highlight(this.model.id, { wordsOnly: true});
     this.makeMemosDraggable();
 
     return this;

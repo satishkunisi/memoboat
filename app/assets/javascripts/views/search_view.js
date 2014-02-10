@@ -18,14 +18,10 @@ Memoboat.Views.SearchView = Backbone.View.extend({
 
     _.debounce(function () {
       that.submitSearch(event)
-    }, 1000)();
+    }, 2000)();
   },
 
   submitSearch: function (event) {
-
-    // if (event.which !== 13) {
-    //   return;
-    // }
 
     var queryString = $(event.target).val();
     Memoboat.Routers.router.searchView(queryString);
