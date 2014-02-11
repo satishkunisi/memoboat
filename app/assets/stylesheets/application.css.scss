@@ -22,7 +22,7 @@
 div.alert {
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: -50px;
   z-index: 99999
 }
 
@@ -94,6 +94,7 @@ h1, h2, h3, h4 {
 #editor {
   margin-top: 10px;
   height: 520px;
+  overflow: hidden;
 }
 
 #editor-controls {
@@ -123,6 +124,8 @@ h1, h2, h3, h4 {
   overflow: scroll;
   outline: none;
   margin: 10px 0;
+  padding: 10px;
+  border: 1px dotted #ccc;
 }
 
 [contentEditable=true]:empty:not(:focus):before {
@@ -179,7 +182,8 @@ img.img-thumbnail {
   font-family: Courier New;
   font-weight: bold;
   font-size: 24px;
-  border-bottom: 3px solid #ccc
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 10px;
 }
 
 
