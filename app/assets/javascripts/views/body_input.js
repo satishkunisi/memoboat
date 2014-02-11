@@ -12,7 +12,7 @@ Memoboat.Views.BodyInput = Backbone.View.extend({
     "click button#memo-save": "autoSave"
   },
 
-  autoSave: _.debounce(function () {
+  autoSave: _.debounce(function (event) {
       var newBody = $('#memo_body').text();
       var oldBody = this.model.get('body');
 
