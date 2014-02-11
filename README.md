@@ -1,4 +1,4 @@
-== Welcome to MemoBoat
+##Welcome to MemoBoat
 
 MemoBoat is an Evernote-inspired cloud note-taking app. MemoBoat is a Backbone.js app consuming a RESTful API built with Rails. It features:
 
