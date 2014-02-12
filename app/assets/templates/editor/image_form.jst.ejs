@@ -1,11 +1,25 @@
-<div class="form-group">
-  
+
+<div id="img-form-content" class="form-group">
   <% if (!memo.hasImage()) { %>
     <span id="attach-image-icon" class="glyphicon glyphicon-paperclip attach-image"></span>
     <span class="text-danger attach-image">Attach Image</span>
   <% } else { %>
-    <span id="remove-image-icon" class="glyphicon glyphicon-remove remove-attachment"></span>
-    <span class="text-danger remove-attachment">Remove Image</span>
+     <p>
+      <span id="attach-image-icon" class="glyphicon glyphicon-paperclip attach-image"></span>
+      <strong>Attached Image</strong>
+    </p>
+    <img src="<%= memo.get('image_small_url') %>" class="img-thumbnail">
   <% } %>
   <input type="file" id="attach-image">
+  <div class="progress">
+    <div class="progress-bar progress-bar-danger" 
+         role="progressbar" 
+         aria-valuenow="0" 
+         aria-valuemin="0" 
+         aria-valuemax="100" 
+         style="width: 0%">
+         <span class="sr-only">0% complete</span>
+    </div>
+  </div>
+</div>
 </div>

@@ -21,7 +21,7 @@ class Memo < ActiveRecord::Base
   has_many :tags, :through => :taggings, :source => :tag
 
   has_attached_file :image, :styles => {
-    :big => "300x300>",
+    :big => "1000x1000>",
     :small => "100x100#"
   }
 
@@ -46,5 +46,8 @@ class Memo < ActiveRecord::Base
   def image_small_url
     self.image.url(:small)
   end
-  
+
+  def image_url
+    self.image.url
+  end
 end

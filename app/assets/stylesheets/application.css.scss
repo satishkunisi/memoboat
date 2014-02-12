@@ -75,15 +75,13 @@ h1, h2, h3, h4 {
   font-weight: bold
 }
 
-
-
 .brand {
   margin: 10px 30px;
 }
 
 #body-input {
   width: 100%;
-  max-height: 300px;
+  max-height: 500px;
   overflow: scroll;
 }
 
@@ -93,7 +91,7 @@ h1, h2, h3, h4 {
 
 #editor {
   margin-top: 10px;
-  height: 520px;
+  height: 580px;
   overflow: hidden;
 }
 
@@ -108,19 +106,45 @@ h1, h2, h3, h4 {
 }
 
 #image-form {
+  border-top: 1px dotted #ccc;
+  padding: 5px;
   margin-top: 10px;
-  clear: both;
   float: left;
-  width: 90%
+  width: 90%;
 }
 
+#img-form-content img {
+  margin-left: 10px;
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  filter:alpha(opacity=5);
+  height: 75px;
+}
+
+#img-form-content img:hover {
+  opacity: 1;
+  -moz-opacity: 1;
+  filter:alpha(opacity=1)
+}
+
+
+#img-form-content button {
+  opacity: 1;
+  -moz-opacity: 1;
+  filter:alpha(opacity=1);
+  color: #FF0000;
+  position: absolute;
+  left: 20px;
+  float:left;
+  z-index: 9999
+}
 
 #memo_body {
   float: left;
   clear: both;
   width: 90%;
   font-family: Courier New, Courier, serif;
-  height: 100px;
+  height: 180px;
   overflow: scroll;
   outline: none;
   margin: 10px 0;
@@ -128,11 +152,7 @@ h1, h2, h3, h4 {
   border: 1px dotted #ccc;
 }
 
-[contentEditable=true]:empty:not(:focus):before {
-  content:attr(data-ph)
-}
-
-img.img-thumbnail {
+#memo-item img.img-thumbnail {
   clear: both;
   float:left
 }
@@ -213,7 +233,7 @@ img.img-thumbnail {
 }
 
 #memo-sidebar .list-group{
-  max-height: 520px;
+  max-height: 580px;
   overflow: scroll
 }
 
@@ -239,6 +259,13 @@ ul#memo-tag-list {
 .listgroup-item-heading, .list-group-item {
   z-index: 500
 }
+
+.progress {
+  display: none;
+  width: 50%
+}
+
+
 
 #image-form:hover {
   cursor: pointer

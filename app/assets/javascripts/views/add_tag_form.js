@@ -69,7 +69,7 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
 
   render: function () {
     var disabled = this.model.isNew();
-    
+    console.log(disabled)
     var renderedContent = this.template({
       model: this.model,
       disabled: disabled
@@ -81,13 +81,9 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
      local: Memoboat.userTags.allNames()
     });
  
-    // initialize the bloodhound suggestion engine
     tags.initialize();
      
-    // instantiate the typeahead UI
-
     this.$el.html(renderedContent);
-
 
     this.$el.find('.twitter-typeahead')
             .typeahead(null, {

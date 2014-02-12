@@ -29,7 +29,7 @@ Memoboat.Views.TitleInput = Backbone.View.extend({
 
     titleData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
     titleData["memo"]["title"] = $('#memo_title').val();
-    titleData["memo"]["body"] = $.trim($('#memo_body').text());
+    titleData["memo"]["body"] = $('#memo_body').val();
 
     function triggerSort () {
       Memoboat.Vents.vent.trigger("memoList:reRender");

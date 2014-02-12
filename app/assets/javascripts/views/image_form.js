@@ -10,15 +10,18 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
 
   events: {
     "click .attach-image": "triggerAttachment",
-    "click .remove-attachment": "removeAttachment",
-    "change #attach-image": "attachImage"
+    "change #attach-image": "attachImage",
+    "mouseenter #img-form-content": "imageControls",
+    "mouseleave #img-form-content": "removeImgControls",
+    "click #img-form-content button.close": "removeAttachment",
+    "click #img-form-content img": "openImage"
   }, 
 
   render: function () {
     var renderedContent = this.template({
       memo: this.model
     });
-
+    
     this.$el.html(renderedContent);
     return this;
   },
@@ -31,15 +34,52 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
   attachImage: function (event) {
     var that = this;
 
+    $('.progress').show();
+
     var file = $('#attach-image').get(0).files[0]
     var reader = new FileReader();
     var imageURL;
+
+    reader.onloadstart = function () {
+    }
+
+    reader.onloadend = function () {
+      
+    }
+
+    reader.onprogress = function (data) {
+      if (data.lengthComputable) {
+        var progress = (data.loaded / data.total) * 100;
+        var progress_perc = "width: " + parseInt(progress) + "%";
+
+        $('.progress div.progress-bar').attr('aria-valuenow', progress);
+        $('.progress div.progress-bar').attr('style', progress_perc);
+      }
+      
+    }
 
     reader.onload = function () {
       that.saveNote(event, this.result);
     }
 
     reader.readAsDataURL(file);
+  },
+
+  imageControls: function (event) {
+    if (this.model.hasImage()) {
+      var closeBtn = '<button type="button" class="close" aria-hidden="true">&times;</button>';
+      $(event.currentTarget).append(closeBtn);
+    }
+  },
+
+  openImage: function () {
+    window.open(this.model.get('image_url'));
+  },
+
+  removeImgControls: function (event) {
+    if (this.model.hasImage()) {
+      $('#img-form-content button.close').remove();
+    }
   },
 
   removeAttachment: function (event) {
@@ -56,7 +96,7 @@ Memoboat.Views.ImageForm = Backbone.View.extend({
     var memoData = {memo: {}};
 
     memoData["memo"]["title"] = $('#memo_title').val();
-    memoData["memo"]["body"] = $.trim($('#memo_body').text());
+    memoData["memo"]["body"] = $('#memo_body').val();
     memoData["memo"]["notebook_id"] = $("#memo-notebook-id").val();
     memoData["memo"]["image"] = imageData;
 

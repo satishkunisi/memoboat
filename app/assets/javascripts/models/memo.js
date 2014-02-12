@@ -3,12 +3,15 @@ Memoboat.Models.Memo = Backbone.Model.extend({
   urlRoot: "/api/memos",
 
   preview: function () {
-    if (this.get('body')) {
-      return this.get('body').slice(0, 106);
-    } else {
+    var bodyText = this.get('body');
+
+    if (!bodyText) {
       return;
+    } else if (bodyText.length > 70) {
+      return (bodyText.slice(0, 70) + "...");
+    } else {
+      return bodyText;
     }
-    
   },
 
   shortTitle: function () {
