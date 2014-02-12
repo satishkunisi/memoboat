@@ -26,7 +26,7 @@ class Memo < ActiveRecord::Base
   }
 
   validates_attachment_content_type :image, 
-                                    :content_type => %w(image/jpeg image/jpg image/png)
+                                    :content_type => %w(image/jpeg image/jpg image/png image/gif)
 
   def generate_default_title
     return nil unless self.title.length == 0 
