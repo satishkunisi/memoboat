@@ -27,12 +27,16 @@ div.alert {
 }
 
 #add-notebook-form input {
-  width: 150px;
+  font-size: 12px;
+  width: 120px;
   float: right;
 }
 
 #add-notebook-form button {
-  width: 50px;
+  width: 33px;
+  height: 33px;
+  text-align: center;
+  padding: 0;
   float: right;
 }
 
@@ -142,17 +146,12 @@ h1, h2, h3, h4 {
   width: 90%;
   font-family: Courier New, Courier, serif;
   height: 180px;
-  
   outline: none;
   margin: 10px 0;
   padding: 10px;
   border: 1px dotted #ccc;
 }
 
-#memo-item img.img-thumbnail {
-  clear: both;
-  float:left
-}
 
 #memo-button-controls {
  float: right;
@@ -168,9 +167,8 @@ h1, h2, h3, h4 {
 }
 
 .memo-item img {
-  margin-top: -40px;
-  display: inline;
-  float: right;
+  margin-left: 10px;
+  height: 90px;
 }
 
 .memo-item p {
@@ -213,7 +211,7 @@ h1, h2, h3, h4 {
 }
 
 .min_size {
-  width: 65%;
+  width: 55%;
 }
 
 .max_size {
@@ -244,13 +242,19 @@ ul#memo-tag-list {
 
 #notebook-list {
   max-height: 245px;
-  
   margin-bottom: 10px; 
 }
 
 #notebook-sidebar {
-  min-width: 250px;
+  font-size: 12px;
 }
+
+.tag-container {
+  display: inline-block;
+  margin: 2px;
+  padding: 2px
+}
+
 
 .listgroup-item-heading, .list-group-item {
   z-index: 500
@@ -260,8 +264,6 @@ ul#memo-tag-list {
   display: none;
   width: 50%
 }
-
-
 
 #image-form:hover {
   cursor: pointer

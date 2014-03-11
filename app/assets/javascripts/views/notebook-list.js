@@ -45,7 +45,6 @@ Memoboat.Views.NotebookList = Backbone.View.extend({
 
     notebook.destroy({
       success: function () {
-        // how to redirect to first item in this collection?
         if ( notebook.id === $(that._activeNotebook).data('id')) {
           var newNotebookId = $('.list-group-item').first().data('id');
           that._swapActiveNotebook($('.list-group-item').first());

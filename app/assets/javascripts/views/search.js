@@ -1,9 +1,8 @@
 Memoboat.Views.SearchView = Backbone.View.extend({
   initialize: function () {
-    //
   },
 
-  className: "col-xs-6",
+  className: "col-xs-4",
 
   events: {
     "keydown #search-box": "submitSearch"
@@ -18,9 +17,6 @@ Memoboat.Views.SearchView = Backbone.View.extend({
     }
 
     var queryString = $(event.target).val();
-    
-    console.log(queryString)
-    //Memoboat.Routers.router.searchView(q)
 
   },
 

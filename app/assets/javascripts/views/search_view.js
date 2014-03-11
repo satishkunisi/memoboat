@@ -3,7 +3,7 @@ Memoboat.Views.SearchView = Backbone.View.extend({
     var that = this;
   },
 
-  className: "col-xs-6",
+  className: "col-xs-4 col-md-6",
 
   id: "search-container",
 

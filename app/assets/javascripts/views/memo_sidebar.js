@@ -25,7 +25,7 @@ Memoboat.Views.MemoSidebar = Backbone.View.extend({
 
   template: JST['memo_sidebar'],
 
-  className: "col-xs-3",
+  className: "col-xs-4",
 
   id: "memo-sidebar",
 

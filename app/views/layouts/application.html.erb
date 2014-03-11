@@ -8,12 +8,8 @@
 </head>
 <body>
 
-
-   
-
   <nav class="navbar navbar-default" role="navigation">
       
-    
     <ul class="nav navbar-nav pull-right">
       <li>
         <%= link_to("Home", "#") %>
@@ -50,8 +46,9 @@
   <% end %>
 
   
-
-<%= yield %>
+<div class="container">
+    <%= yield %>
+</div>
 
 </body>
 </html>

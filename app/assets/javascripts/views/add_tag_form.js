@@ -69,7 +69,6 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
 
   render: function () {
     var disabled = this.model.isNew();
-    console.log(disabled)
     var renderedContent = this.template({
       model: this.model,
       disabled: disabled
