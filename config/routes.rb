@@ -20,6 +20,7 @@ Memoboat::Application.routes.draw do
     
     resources :memos, :except => [:new, :edit]
     resources :taggings, :except => [:new, :edit, :index]
+    resource :feed, :only => [:show]
   end
   
 end

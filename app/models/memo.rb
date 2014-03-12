@@ -1,12 +1,23 @@
 class Memo < ActiveRecord::Base
-  include PgSearch
+  #include PgSearch
 
-  attr_accessible :title, :body, :notebook_id, :image
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+  mapping do 
+    indexes :id, :index => :not_analyzed
+    indexes :title, :analyzer => :standard
+    indexes :author, :index => :not_analyzed
+    indexes :body, :analyzer => :standard
+    indexes :tags, :analyzer => :standard
+  end
+
+  attr_accessible :title, :body, :notebook_id, :image, :public
 
   validates :title, :notebook_id, :presence => true
   validates :body, :length => {:maximum => 4000}
 
-  pg_search_scope :search_text, :against => {:title => 'A', :body => 'B'}
+  #pg_search_scope :search_text, :against => {:title => 'A', :body => 'B'}
   
   before_validation :generate_default_title
 
@@ -27,6 +38,10 @@ class Memo < ActiveRecord::Base
 
   validates_attachment_content_type :image, 
                                     :content_type => %w(image/jpeg image/jpg image/png image/gif)
+
+  def self.index_tag(memo, tag)
+    Memo.index
+  end
 
   def generate_default_title
     return nil unless self.title.length == 0 
@@ -50,4 +65,14 @@ class Memo < ActiveRecord::Base
   def image_url
     self.image.url
   end
+
+  def to_indexed_json
+    { 
+      :id => id,
+      :title   => title,
+      :body => body,
+      :author  => author.email
+    }.to_json
+  end
+
 end
