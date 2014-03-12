@@ -12,7 +12,7 @@ Memoboat.Views.SearchMemosList = Backbone.View.extend({
 
   template: JST['search_memos'],
 
-  className: "col-xs-3",
+  className: "col-xs-4",
 
   id: "search-memos-list",
 

@@ -68,7 +68,9 @@ div.alert {
 
 
 body {
+  padding-top: 100px;
   font-family: Courier, serif;
+  position: relative;
 }
 
 h1, h2, h3, h4 {
@@ -94,6 +96,19 @@ h1, h2, h3, h4 {
   margin-top: 10px;
   height: 580px;
   overflow: hidden;
+}
+
+div#editor.affix {
+  top: 150px;
+  right: 140px;
+  width: 570px;
+}
+
+div#search-container.affix {
+  top: 100px;
+  left: auto;
+  right: 140px;
+  width: 570px;
 }
 
 #editor-controls {
@@ -137,7 +152,7 @@ h1, h2, h3, h4 {
   position: absolute;
   left: 20px;
   float:left;
-  z-index: 9999
+  z-index: 600
 }
 
 #memo_body {

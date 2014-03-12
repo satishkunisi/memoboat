@@ -17,9 +17,6 @@ Memoboat.Views.Editor = Backbone.View.extend({
   },
 
   render: function () {
-    var mainContent = this.template({
-      memo: this.model
-    });
 
     var controls = new Memoboat.Views.EditorControls({
       model: this.model,
@@ -49,9 +46,6 @@ Memoboat.Views.Editor = Backbone.View.extend({
       model: this.model
     });
 
-                 
-    this.$el.html(mainContent)
-
     this.$el.append(memoTagList.render().$el)
             .append(imageForm.render().$el)
             .append(titleInput.render().$el)
@@ -60,6 +54,12 @@ Memoboat.Views.Editor = Backbone.View.extend({
             .prepend(timeData.render().$el);
 
     this.makeMemoListDroppable();
+
+    this.$el.affix({
+      offset: {
+        top: 0
+      }
+    });
 
     return this;
   },

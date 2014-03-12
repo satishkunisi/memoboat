@@ -32,6 +32,13 @@ Memoboat.Views.SearchView = Backbone.View.extend({
   render: function () {
     var renderedContent = this.template();
     this.$el.html(renderedContent);
+    
+    this.$el.affix({
+      offset: {
+        top: 0
+      }
+    });
+
     return this;
   }
 

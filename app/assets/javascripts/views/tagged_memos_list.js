@@ -12,7 +12,7 @@ Memoboat.Views.TaggedMemosList = Backbone.View.extend({
 
   template: JST['tagged_memos'],
 
-  className: "col-xs-3",
+  className: "col-xs-4",
 
   id: "tagged-memos-list",
 

@@ -11,18 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140207195738) do
+ActiveRecord::Schema.define(:version => 20140311182732) do
 
   create_table "memos", :force => true do |t|
-    t.string   "title",              :null => false
+    t.string   "title",                                 :null => false
     t.text     "body"
-    t.integer  "notebook_id",        :null => false
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "notebook_id",                           :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "public",             :default => false
   end
 
   add_index "memos", ["notebook_id", "title"], :name => "index_memos_on_notebook_id_and_title"
