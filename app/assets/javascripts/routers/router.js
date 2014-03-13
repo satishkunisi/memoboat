@@ -18,6 +18,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   mainView: function () {
     var that = this;
 
+    this._removeAllViews();
     this.installNotebooksSidebar(function () {
       var firstNbId = Memoboat.notebooks.first().id;
       that.switchNotebook(firstNbId);
@@ -71,6 +72,26 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     }
   },
 
+  feedSearch: function (queryString) {
+    var that = this;
+
+    search = new Memoboat.Models.Search({
+      id: queryString
+    });
+
+    search.fetch({
+      success: function () {
+
+        searchResults = new Memoboat.Views.SearchResults({
+          collection: search.get('memos')
+        })
+
+        that.allViews.push(searchResults);
+        that.$rootEl.append(searchResults.render().$el);
+      }
+    });
+
+  },
 
   tagView: function (tagName) {
 
