@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140311182732) do
+ActiveRecord::Schema.define(:version => 20140313012004) do
 
   create_table "memos", :force => true do |t|
     t.string   "title",                                 :null => false
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20140311182732) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name"

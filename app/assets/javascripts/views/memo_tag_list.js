@@ -19,11 +19,12 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
   deleteTagging: function (event) {
     event.preventDefault();
 
-    var tagId = $(event.currentTarget).data('id');
+    var tagName = $(event.currentTarget).data('name');
     var memoId = this.model.id;
     var that = this;
 
-    var taggingId = this.model.get('tags').get(tagId).get('tagging').id
+    var tag = this.model.get('tags').where({name: tagName})[0]
+    var taggingId = tag.get('tagging').id
     
     var tagging = new Memoboat.Models.Tagging({
       id: taggingId
@@ -31,7 +32,7 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
 
     tagging.destroy({
       success: function () {
-        that.model.get('tags').remove(tagId);
+        that.model.get('tags').remove(tag);
         that.model.fetch();
       }
     })
@@ -39,9 +40,8 @@ Memoboat.Views.MemoTagList = Backbone.View.extend({
   },
 
   showTags: function (event) {
-    var tagId = $(event.target).data('id');
-
-    Backbone.history.navigate('tags/' + tagId, {trigger: true});
+    var tagName = $(event.target).data('name');
+    Memoboat.Routers.router.tagView(tagName);
   },
 
   installTagsListener: function () {

@@ -5,4 +5,6 @@ class Tagging < ActiveRecord::Base
 
   belongs_to :tag
   belongs_to :memo
+
+  after_create { memo.update_index }
 end

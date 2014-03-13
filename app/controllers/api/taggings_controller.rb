@@ -15,6 +15,7 @@ class Api::TaggingsController < ApplicationController
 
   def destroy
     @tagging = Tagging.find(params[:id])
+    Tag.destroy_if_memoless(@tagging.tag)
     @tagging.destroy
   end
 end

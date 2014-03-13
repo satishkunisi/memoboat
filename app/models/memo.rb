@@ -9,15 +9,15 @@ class Memo < ActiveRecord::Base
     indexes :title, :analyzer => :standard
     indexes :author, :index => :not_analyzed
     indexes :body, :analyzer => :standard
-    indexes :tags, :analyzer => :standard
+    indexes :tags do
+      indexes :name, :analyzer => :standard
+    end
   end
 
   attr_accessible :title, :body, :notebook_id, :image, :public
 
   validates :title, :notebook_id, :presence => true
   validates :body, :length => {:maximum => 4000}
-
-  #pg_search_scope :search_text, :against => {:title => 'A', :body => 'B'}
   
   before_validation :generate_default_title
 
@@ -67,12 +67,7 @@ class Memo < ActiveRecord::Base
   end
 
   def to_indexed_json
-    { 
-      :id => id,
-      :title   => title,
-      :body => body,
-      :author  => author.email
-    }.to_json
+    to_json(:include => {:tags => {:only => :name}})
   end
 
 end

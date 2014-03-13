@@ -1,21 +1,17 @@
 class Tag < ActiveRecord::Base
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  attr_accessible :name, :id
+  validates :name, :uniqueness => true
 
-  mapping do 
-    indexes :id, :index => :not_analyzed
-    indexes :title, :analyzer => :standard
-    indexes :author, :index => :not_analyzed
-    indexes :body, :analyzer => :standard
-    indexes :tags, :analyzer => :standard
-  end
-
-  attr_accessible :name, :user_id, :id
-  validates :name, :user_id, :presence => true
-  validates :name, :uniqueness => {:scope => :user_id}
-
-  belongs_to :user
   has_many :taggings
   has_many :memos, :through => :taggings, :source => :memo
+
+  def self.destroy_if_memoless(tag)
+    tag.destroy! if tag.taggings.count < 1
+  end
+
+  def self.memos_by_user(tag_name, user)
+    Memo.joins(:tags).joins(:notebook).where('notebooks.user_id = ? AND tags.name = ?', user.id, tag_name)
+  end
+
 end

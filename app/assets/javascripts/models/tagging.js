@@ -1,3 +1,3 @@
 Memoboat.Models.Tagging = Backbone.Model.extend({
-  urlRoot: "api/taggings"
+  urlRoot: "/api/taggings"
 })

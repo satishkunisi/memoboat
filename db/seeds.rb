@@ -20,11 +20,9 @@ ActiveRecord::Base.transaction do
 
   notebook.memos.create!(memos)
 
-  rails = u.tags.new(:name => 'rails') 
-  backbone = u.tags.new(:name => 'backbone.js')
-  features = u.tags.new(:name => 'features')
-
-  [rails, backbone, features].each { |tag| tag.save! }
+  rails = Tag.create!(:name => 'rails') 
+  backbone = Tag.create!(:name => 'backbone.js')
+  features = Tag.create!(:name => 'features')
 
   welcome = Memo.find_by_title('Welcome to MemoBoat!')
   welcome.taggings.create!({:tag_id => rails.id}) 

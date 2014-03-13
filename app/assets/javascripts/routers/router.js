@@ -3,10 +3,12 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     this.$rootEl = options.$rootEl;
     Memoboat.notebooks = new Memoboat.Collections.Notebooks();
     Memoboat.userTags = new Memoboat.Collections.UserTags();
+    this.allViews = [];
   },
 
   routes: {
     "": "mainView",
+    "feed": "feedLink",
     "notebooks/:id": "switchNotebook",
     "notebooks/:notebookId/memos/:id": "switchMemo",
     "tags/:id": "tagView",
@@ -22,6 +24,13 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     });
   },
 
+  feedLink: function () {
+    this._removeAllViews();
+    feedView = new Memoboat.Views.FeedSearchView();
+    this.allViews.push(feedView);
+    this.$rootEl.append(feedView.render().$el);
+  },
+
   searchView: function (query) {
 
     var that = this;
@@ -34,10 +43,14 @@ Memoboat.Routers.Router = Backbone.Router.extend({
       search.fetch({
         success: function () {
           var memos = search.get('memos');
+
+          console.log(memos[0]);
+
           var searchMemosList = new Memoboat.Views.SearchMemosList({
             model: search,
             collection: memos
           })
+
 
           that._swapMemoList(searchMemosList);
         },
@@ -59,14 +72,14 @@ Memoboat.Routers.Router = Backbone.Router.extend({
   },
 
 
-  tagView: function (id) {
+  tagView: function (tagName) {
 
     var that = this;
 
     function createTagView () {
       tag = new Memoboat.Models.Tag({
-        id: id
-      })
+        name: tagName
+      });
 
       tag.fetch({
         success: function () {
@@ -84,7 +97,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     
 
     if ($('#notebook-sidebar').length === 0) {
-      this.installNotebooksSidebar(createTagView, id);
+      this.installNotebooksSidebar(createTagView);
     } else {
       createTagView();
     }
@@ -119,6 +132,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
           activeNotebook: activeNotebook,
         });
 
+        that.allViews.push(nbSidebar);
         that.$rootEl.append(nbSidebar.render().$el);
 
         if (callback) {
@@ -135,6 +149,7 @@ Memoboat.Routers.Router = Backbone.Router.extend({
     }
 
     var searchBox = new Memoboat.Views.SearchView();
+    this.allViews.push(searchBox);
     this.$rootEl.append(searchBox.render().$el);
   },
 
@@ -209,13 +224,21 @@ Memoboat.Routers.Router = Backbone.Router.extend({
    _swapMemoList: function (view) {
     this._currentMemoList && this._currentMemoList.remove();
     this._currentMemoList = view;
+    this.allViews.push(view);
     $('#notebook-sidebar').after(view.render().$el)
   },
 
    _swapEditor: function (view) {
     this._currentEditor && this._currentEditor.remove();
     this._currentEditor = view;
+    this.allViews.push(view);
     this.$rootEl.append(view.render().$el);
 
+  },
+
+  _removeAllViews: function () {
+    this.allViews.forEach(function (view) {
+      view.remove();
+    });
   }
 })

@@ -23,6 +23,11 @@ Memoboat.Views.NotebookSidebar = Backbone.View.extend({
     return this;
   },
 
+  feedLink: function () {
+    console.log("fired");
+    Backbone.Routers.router.feedLink();
+  },
+
   installAddNotebookForm: function () {
     var newNotebook = new Memoboat.Models.Notebook();
     var addNotebookView = new Memoboat.Views.AddNotebook({

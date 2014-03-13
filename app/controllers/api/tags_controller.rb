@@ -1,12 +1,12 @@
 class Api::TagsController < ApplicationController
+  before_filter :require_logged_in, :only => [:create]
+
   def index
-    @tags = current_user.tags
+    @tags = Tag.all
   end
   
   def create
-    user_id = current_user.id
-
-    @tag = current_user.tags.build(params[:tag])
+    @tag = Tag.new(params[:tag])
 
     if @tag.save
       render :create
@@ -16,11 +16,6 @@ class Api::TagsController < ApplicationController
   end
 
   def show
-    @tag = Tag.includes(:taggings => :memo).where(:id => params[:id]).first
+    @tag = Tag.includes(:taggings => :memo).where(:name => params[:id]).first
   end
-
-  def destroy
-    @tag = Tag.find(params[:id])
-    @tag.destroy
-  end 
 end

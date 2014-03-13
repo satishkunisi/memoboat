@@ -39,15 +39,23 @@ Memoboat.Views.AddTagForm = Backbone.View.extend({
 
     var tag = new Memoboat.Models.Tag({
       name: tagName 
-    })
+    });
 
     tag.save({}, {
-      success: function () {
-        that.addTagging(tag);
-        Memoboat.userTags.add(tag);
+      success: function (fetchedTag) {
+        that.addTagging(fetchedTag);
+        Memoboat.userTags.add(fetchedTag);
+      },
+      error: function (model, response) {
+        tag.fetch({
+          success: function (savedTag) {
+            that.addTagging(savedTag);
+            Memoboat.userTags.add(savedTag);
+          }
+        });
       }
-    })
-    
+    });
+
   },
 
   addTagging: function (tag) {

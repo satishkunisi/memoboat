@@ -16,6 +16,8 @@
       </li>
       <% if logged_in? %>
         <li>
+          <%= link_to("Feed", '#feed' ) %>
+        <li>
           <%= link_to("Sign Out", session_url, :method => :delete) %>
         </li>
       <% else %>

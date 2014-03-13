@@ -16,8 +16,7 @@ class User < ActiveRecord::Base
            :dependent => :destroy
 
   has_many :memos, :through => :notebooks, :source => :memos
-  has_many :tags
-  
+
   def self.find_by_credentials(user_params)
     user = User.find_by_email(user_params[:email])
 
@@ -46,6 +45,29 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def tags
+    Tag.find_by_sql [<<-SQL, self.id]
+      SELECT
+        tags.*
+      FROM
+        tags
+      INNER JOIN
+        taggings
+      ON
+        taggings.tag_id = tags.id
+      INNER JOIN
+        memos
+      ON
+        memos.id = tags.id
+      INNER JOIN
+        notebooks
+      ON
+        notebooks.id = memos.notebook_id
+      WHERE
+        notebooks.user_id = ?
+    SQL
+  end
+
   private
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
@@ -54,5 +76,4 @@ class User < ActiveRecord::Base
   def create_default_notebook
     self.notebooks.create!(:title => "Default Notebook")
   end
-
 end

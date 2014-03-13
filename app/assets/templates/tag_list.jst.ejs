@@ -1,8 +1,8 @@
 <h3>Tags</h3>
 <div class="list-group">
   <% tags.forEach(function (tag) { %>
-    <a href="#" data-id="<%= tag.id %>" class="list-group-item tag-list-item"> 
-      <span class="listgroup-item-heading user-tag-item" data-id="<%= tag.id %>">
+    <a href="#" data-name="<%= tag.get('name') %>" class="list-group-item tag-list-item"> 
+      <span class="listgroup-item-heading user-tag-item">
         <span class="glyphicon glyphicon-tag"></span>
         <%= tag.get('name') %>
       </span>

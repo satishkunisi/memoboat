@@ -22,7 +22,7 @@ namespace :db do
 
       joke_memos = jokes.memos.create!(joke_data)
 
-      humor = joke_memos.first.tags.create!(:name => "humor", :user_id => user.id)
+      humor = joke_memos.first.tags.create!(:name => "humor")
       joke_memos[1..2].each { |memo| humor.taggings.create!(:memo_id => memo.id)}
     end
   end

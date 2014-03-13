@@ -14,6 +14,8 @@ Memoboat::Application.routes.draw do
       end
     end
 
+    resources :user_tags, :only => [:index, :show]
+
     resources :tags, :except => [:new, :edit] do
       resources :taggings, :only => [:index]
     end
