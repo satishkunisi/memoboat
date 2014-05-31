@@ -18,9 +18,6 @@ Memoboat.Views.SearchView = Backbone.View.extend({
     }
 
     var queryString = $(event.target).val();
-    
-    console.log(queryString)
-    //Memoboat.Routers.router.searchView(q)
 
   },
 
